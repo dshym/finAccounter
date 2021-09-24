@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-
+import Navigation from '../navigation/navigation';
 import { Layout } from 'antd';
 
 const { Header, Content } = Layout;
@@ -8,7 +8,7 @@ const { Header, Content } = Layout;
 const MainLayout = (props) => {
     return (
         <Layout>
-            <Header>{props.headerContent}</Header>
+            {props.children}
             <Content>
                 {props.mainContent}
             </Content>
