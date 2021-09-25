@@ -1,24 +1,46 @@
 import * as actionType from '../actions/assetsActionTypes';
 
 const initialState = {
-    assets: []
+    countries: []
 };
 
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionType.ADD_COUNTRY:
+            const newCountry = {
+                id: action.countryData.id,
+                name: action.countryData.name,
+                assets: []
+            }
+            const newState = {
+                countries: state.countries.concat(newCountry)
+            }
+            return {
+                ...newState
+            }
+        case actionType.DELETE_COUNTRY:
+            return {
+                countries: state.countries.filter(country => country.id !== action.id)
+            }
         case actionType.ADD_ASSET:
             const newAsset = {
                 id: action.assetData.id,
                 name: action.assetData.name,
                 amount: action.assetData.amount,
             };
+            const coutriesList1 = [...state.countries];
+            const countryIndex1 = coutriesList1.findIndex(country => country.name === action.assetData.country);
+            coutriesList1[countryIndex1].assets.push(newAsset);
             return {
-                assets: state.assets.concat(newAsset)
+                countries: coutriesList1
             }
         case actionType.DELETE_ASSET:
+            const countriesList2 = [...state.countries];
+            let countryIndex2 = countriesList2.findIndex(country => country.name === action.assetData.country);
+            countriesList2[countryIndex2].assets.filter(asset => asset.id !== action.id);
             return {
-                assets: state.assets.filter(item => item.id !== action.id)
+                countries: countriesList2
             }
         default:
             return state;

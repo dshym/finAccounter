@@ -7,7 +7,7 @@ const AssetItem = (props) => {
     const dispatch = useDispatch();
 
     const deleteAssetHandler = () => {
-        dispatch(assetsActions.deleteAsset(props.assetData.id));
+        dispatch(assetsActions.deleteAsset(props.assetData.id, props.countryName));
     }
   return(
       <tr onClick={deleteAssetHandler}>

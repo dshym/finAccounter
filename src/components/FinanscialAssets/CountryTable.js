@@ -8,13 +8,14 @@ import AssetItem from "./AssetItem";
 
 
 const CountryTable = (props) => {
+    const COUNTRY = props.countryName;
     const [modalVisible, setModalVisible] = useState(false);
     const [nameInput, setNameInput] = useState("");
     const [amountInput, setAmountInput] = useState(0);
 
     const dispatch = useDispatch();
     const store = useSelector(state => {
-        return state.assets.assets;
+        return state.assets.countries.find(country => country.name === COUNTRY) //single country extracted
     });
 
     const openModalHandler = () => {
@@ -29,6 +30,10 @@ const CountryTable = (props) => {
         setAmountInput(event.target.value);
     }
 
+    const deleteCountryHandler = () => {
+        dispatch(assetActions.deleteCountry(store.id));
+    }
+
     const addAssethandler = () => {
         setModalVisible(false);
         if(!nameInput.trim()) {
@@ -40,25 +45,31 @@ const CountryTable = (props) => {
             return;
         }
         //add asset to redux
-        dispatch(assetActions.addAsset(Math.random(), nameInput, Number.parseFloat(amountInput).toFixed(2)));
+        dispatch(assetActions.addAsset(Math.random(), nameInput, Number.parseFloat(amountInput).toFixed(2), props.countryName));
         setNameInput("");
         setAmountInput(0);
     }
 
+    let tableContent;
+
+    if(store.assets.length > 0) {
+        tableContent = store.assets.map(asset => {
+            return(
+                <AssetItem key={asset.id} assetData={asset} countryName={props.countryName}/>
+            );
+        });
+    }
+
   return (
       <div className={classes.container}>
-          <h3>{props.countryName}</h3>
+          <h3 onClick={deleteCountryHandler}>{props.countryName}</h3>
           <table>
               <tbody>
                   <tr>
                       <th>Asset name</th>
                       <th>Amount</th>
                   </tr>
-                  {store.map(asset => {
-                      return(
-                          <AssetItem key={asset.id} assetData={asset}/>
-                      );
-                  })}
+                  {tableContent}
               </tbody>
           </table>
           <Button onClick={openModalHandler}>Add asset</Button>

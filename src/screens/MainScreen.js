@@ -9,7 +9,7 @@ const MainScreen = () => {
   return(
       <Fragment>
           <div className={classes.mainScreenContainer}>
-              <ScreenLayout  leftContent={<><FinancialAssets/></>} rightContent={<><FinancialAssets/></>} />
+              <ScreenLayout  leftContent={<><FinancialAssets/></>} rightContent={<></>} />
           </div>
       </Fragment>
   );
