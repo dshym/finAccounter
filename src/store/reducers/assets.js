@@ -24,11 +24,12 @@ const reducer = (state = initialState, action) => {
                 countries: state.countries.filter(country => country.id !== action.id)
             }
         case actionType.EDIT_COUNTRY:
-            const countryIndex = state.countries.findIndex(country => country.id === action.countryData.id);
-            const countriesList = [...state.countries];
-            countriesList[countryIndex].name = action.countryData.newName;
+            const countryIndex = state.countries.findIndex(country =>
+                country.id === action.countryData.id);
+            const contriesListForEdit = [...state.countries];
+            contriesListForEdit[countryIndex].name = action.countryData.newName;
             return {
-                countries: countriesList
+                countries: contriesListForEdit
             }
         case actionType.ADD_ASSET:
             const newAsset = {
@@ -36,19 +37,33 @@ const reducer = (state = initialState, action) => {
                 name: action.assetData.name,
                 amount: action.assetData.amount,
             };
-            const coutriesList1 = [...state.countries];
-            const countryIndex1 = coutriesList1.findIndex(country => country.name === action.assetData.country);
-            coutriesList1[countryIndex1].assets.push(newAsset);
+            const countriesListForAddAsset = [...state.countries];
+            const countryIndexForAddAsset = countriesListForAddAsset.findIndex(country =>
+                country.name === action.assetData.country);
+            countriesListForAddAsset[countryIndexForAddAsset].assets.push(newAsset);
             return {
-                countries: coutriesList1
+                countries: countriesListForAddAsset
+            }
+        case actionType.EDIT_ASSET:
+            const countriesListForEditAsset = [...state.countries];
+            let countryIndexForEditAsset = countriesListForEditAsset.findIndex(country =>
+                country.name === action.assetData.countryName);
+            let assetIndexForEdit = countriesListForEditAsset[countryIndexForEditAsset].assets.findIndex(asset =>
+                asset.id === action.assetData.id);
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].name = action.assetData.name;
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].amount = action.assetData.amount;
+            return {
+                countries: countriesListForEditAsset
             }
         case actionType.DELETE_ASSET:
-            const countriesList2 = [...state.countries];
-            let countryIndex2 = countriesList2.findIndex(country => country.name === action.assetData.country);
-            let assetIndex = countriesList2[countryIndex2].assets.findIndex(asset => asset.id === action.assetData.id);
-            countriesList2[countryIndex2].assets.splice(assetIndex, 1);
+            const countriesListForDeleteAsset = [...state.countries];
+            let countryIndexForDeleteAsset = countriesListForDeleteAsset.findIndex(country =>
+                country.name === action.assetData.country);
+            let assetIndexForDelete = countriesListForDeleteAsset[countryIndexForDeleteAsset].assets.findIndex(asset =>
+                asset.id === action.assetData.id);
+            countriesListForDeleteAsset[countryIndexForDeleteAsset].assets.splice(assetIndexForDelete, 1);
             return {
-                countries: countriesList2
+                countries: countriesListForDeleteAsset
             }
         default:
             return state;

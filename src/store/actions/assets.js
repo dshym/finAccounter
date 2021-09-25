@@ -36,6 +36,18 @@ export const addAsset = (id, name, amount, country) => {
     }
 }
 
+export const editAsset = (id, newName, newAmount, countryName) => {
+    return {
+        type: actionType.EDIT_ASSET,
+        assetData: {
+            id: id,
+            name: newName,
+            amount: newAmount,
+            countryName: countryName
+        }
+    }
+}
+
 export const deleteAsset = (id, country) => {
     return {
         type: actionType.DELETE_ASSET,
