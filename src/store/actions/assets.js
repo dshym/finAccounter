@@ -14,6 +14,16 @@ export const deleteCountry = (id) => {
     }
 }
 
+export const editCountry = (id, newName) => {
+    return {
+        type: actionType.EDIT_COUNTRY,
+        countryData: {
+            id: id,
+            newName: newName
+        }
+    }
+}
+
 export const addAsset = (id, name, amount, country) => {
     return {
         type: actionType.ADD_ASSET,
@@ -29,7 +39,9 @@ export const addAsset = (id, name, amount, country) => {
 export const deleteAsset = (id, country) => {
     return {
         type: actionType.DELETE_ASSET,
-        id: id,
-        country: country
+        assetData: {
+            id: id,
+            country: country
+        }
     }
 }

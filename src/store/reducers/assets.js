@@ -23,6 +23,13 @@ const reducer = (state = initialState, action) => {
             return {
                 countries: state.countries.filter(country => country.id !== action.id)
             }
+        case actionType.EDIT_COUNTRY:
+            const countryIndex = state.countries.findIndex(country => country.id === action.countryData.id);
+            const countriesList = [...state.countries];
+            countriesList[countryIndex].name = action.countryData.newName;
+            return {
+                countries: countriesList
+            }
         case actionType.ADD_ASSET:
             const newAsset = {
                 id: action.assetData.id,
@@ -38,7 +45,8 @@ const reducer = (state = initialState, action) => {
         case actionType.DELETE_ASSET:
             const countriesList2 = [...state.countries];
             let countryIndex2 = countriesList2.findIndex(country => country.name === action.assetData.country);
-            countriesList2[countryIndex2].assets.filter(asset => asset.id !== action.id);
+            let assetIndex = countriesList2[countryIndex2].assets.findIndex(asset => asset.id === action.assetData.id);
+            countriesList2[countryIndex2].assets.splice(assetIndex, 1);
             return {
                 countries: countriesList2
             }

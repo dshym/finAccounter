@@ -5,7 +5,7 @@ import classes from './CountryTable.module.css';
 
 import { Button, Modal } from 'antd';
 import AssetItem from "./AssetItem";
-
+import CountryName from './CountryName';
 
 const CountryTable = (props) => {
     const COUNTRY = props.countryName;
@@ -30,10 +30,6 @@ const CountryTable = (props) => {
         setAmountInput(event.target.value);
     }
 
-    const deleteCountryHandler = () => {
-        dispatch(assetActions.deleteCountry(store.id));
-    }
-
     const addAssethandler = () => {
         setModalVisible(false);
         if(!nameInput.trim()) {
@@ -51,7 +47,6 @@ const CountryTable = (props) => {
     }
 
     let tableContent;
-
     if(store.assets.length > 0) {
         tableContent = store.assets.map(asset => {
             return(
@@ -62,7 +57,7 @@ const CountryTable = (props) => {
 
   return (
       <div className={classes.container}>
-          <h3 onClick={deleteCountryHandler}>{props.countryName}</h3>
+          <CountryName countryId={store.id} countryName={COUNTRY} />
           <table>
               <tbody>
                   <tr>

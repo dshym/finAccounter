@@ -1,0 +1,17 @@
+.popoverContainer button {
+    margin: 2px;
+}
+
+.editContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.editContainer input {
+    margin: 2px;
+}
+
+.icon {
+    font-size: 30px;
+}
