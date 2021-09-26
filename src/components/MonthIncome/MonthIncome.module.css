@@ -1,8 +1,14 @@
 .container {
-    display: flex;
-    flex-direction: column;
     margin: 10px;
-    width: 300px;
+    width: 80%;
+}
+
+.icon {
+    font-size: 20px;
+}
+
+.icon:hover {
+    font-size: 25px;
 }
 
 table {
@@ -13,6 +19,7 @@ table {
 
 td, th {
     border: 1px solid #dddddd;
+    font-weight: lighter;
     text-align: left;
     padding: 8px;
 }

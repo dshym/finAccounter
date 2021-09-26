@@ -4,7 +4,7 @@ import classes from './AssetItem.module.css';
 import { useDispatch } from 'react-redux';
 import * as assetsActions from '../../store/actions/assets';
 
-import { Popover, Button } from 'antd';
+import {Popover, Button, Input} from 'antd';
 
 const AssetItem = (props) => {
     const [assetName, setAssetName] = useState(props.assetData.name);
@@ -50,8 +50,8 @@ const AssetItem = (props) => {
     let content;
     if(editMode) {
         content = <tr>
-            <th><input type="text" id="name" value={assetName} onChange={assetNameChangeHandler} onBlur={updateAssetDataHandler}/></th>
-            <th><input type="number" id="amount" value={assetAmount} onChange={assetAmountChangeHandler} onBlur={updateAssetDataHandler}/></th>
+            <th><Input type="text" id="name" value={assetName} onChange={assetNameChangeHandler} onBlur={updateAssetDataHandler}/></th>
+            <th><Input type="number" id="amount" value={assetAmount} onChange={assetAmountChangeHandler} onBlur={updateAssetDataHandler}/></th>
         </tr>
     } else {
         content = <Popover trigger="click" placement="topLeft" content={popoverContent}>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as assetActions from '../../store/actions/assets';
 import classes from './CountryTable.module.css';
 
-import { Button, Modal } from 'antd';
+import { Button, Modal, Input } from 'antd';
 import AssetItem from "./AssetItem";
 import CountryName from './CountryName';
 
@@ -70,10 +70,10 @@ const CountryTable = (props) => {
           <Button onClick={openModalHandler}>Add asset</Button>
           <Modal title="Add asset" visible={modalVisible} onOk={addAssethandler} onCancel={openModalHandler}>
               <label htmlFor="assetName">Asset name</label><br/>
-              <input type="text" required id="assetName" value={nameInput} onChange={nameInputChangeHandler}/>
+              <Input type="text" required id="assetName" value={nameInput} onChange={nameInputChangeHandler}/>
               <br/>
               <label htmlFor="amount">Amount</label><br/>
-              <input type="number" id="amount" value={amountInput} onChange={amountInputChangeHandler}/>
+              <Input type="number" id="amount" value={amountInput} onChange={amountInputChangeHandler}/>
           </Modal>
       </div>
   );

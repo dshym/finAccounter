@@ -5,6 +5,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import assetsReducer from './store/reducers/assets';
+import incomeReducer from './store/reducers/income';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,7 +13,8 @@ import reportWebVitals from './reportWebVitals';
 //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    assets: assetsReducer
+    assets: assetsReducer,
+    income: incomeReducer,
 })
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

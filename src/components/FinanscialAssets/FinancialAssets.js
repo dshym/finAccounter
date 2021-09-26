@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as assetAcions from '../../store/actions/assets';
 import classes from './FinancialAssets.module.css';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import CountryTable from './CountryTable';
 
 const FinancialAssets = () => {
@@ -42,7 +42,7 @@ const FinancialAssets = () => {
               <div className={classes.container}>
                   {content}
                   <div className={classes.countryInputContainer}>
-                      <input type="text" id="countryName" value={newCountry} onChange={newCountryInputChangeHandler}/>
+                      <Input type="text" id="countryName" value={newCountry} onChange={newCountryInputChangeHandler}/>
                       <Button onClick={addCountryHandler} >Add country</Button>
                   </div>
 

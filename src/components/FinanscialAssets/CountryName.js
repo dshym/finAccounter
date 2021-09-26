@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
-import {Button, Popover} from "antd";
+import {Button, Popover, Input} from "antd";
 import {CheckSquareFilled} from '@ant-design/icons';
 
 import * as assetActions from "../../store/actions/assets";
@@ -42,7 +42,7 @@ const CountryName = (props) => {
     let content;
     if(editMode) {
         content = <div className={classes.editContainer}>
-            <input type="text" id="newName" value={newName} onChange={editNameChangeHandler}/>
+            <Input type="text" id="newName" value={newName} onChange={editNameChangeHandler}/>
             <CheckSquareFilled onClick={confirmEditHandler} className={classes.icon} />
         </div>
     } else {

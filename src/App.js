@@ -8,9 +8,7 @@ import NavigationSwitch from './navigation/navigationSwitch';
 function App() {
   return (
     <div className="App">
-        <MainLayout
-            mainContent={<NavigationSwitch />}
-        >
+        <MainLayout mainContent={<NavigationSwitch />}>
             <Navigation />
         </MainLayout>
     </div>
