@@ -59,11 +59,13 @@ const CountryTable = (props) => {
       <div className={classes.container}>
           <CountryName countryId={store.id} countryName={COUNTRY} />
           <table>
-              <tbody>
+              <thead>
                   <tr>
                       <th>Asset name</th>
                       <th>Amount</th>
                   </tr>
+              </thead>
+              <tbody>
                   {tableContent}
               </tbody>
           </table>

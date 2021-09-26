@@ -1,4 +1,4 @@
-const Currencies = {
+const CURRENCIES = {
     hryvna: {
         id: 'hrywna',
         name: 'UAH'
@@ -13,4 +13,4 @@ const Currencies = {
     }
 }
 
-export default Currencies;
+export default CURRENCIES;

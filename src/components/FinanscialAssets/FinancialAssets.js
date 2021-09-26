@@ -48,8 +48,6 @@ const FinancialAssets = () => {
 
               </div>
           </div>
-
-
       </Fragment>
   );
 }

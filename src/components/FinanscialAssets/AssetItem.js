@@ -50,14 +50,14 @@ const AssetItem = (props) => {
     let content;
     if(editMode) {
         content = <tr>
-            <th><Input type="text" id="name" value={assetName} onChange={assetNameChangeHandler} onBlur={updateAssetDataHandler}/></th>
-            <th><Input type="number" id="amount" value={assetAmount} onChange={assetAmountChangeHandler} onBlur={updateAssetDataHandler}/></th>
+            <td><Input type="text" id="name" value={assetName} onChange={assetNameChangeHandler} onBlur={updateAssetDataHandler}/></td>
+            <td><Input type="number" id="amount" value={assetAmount} onChange={assetAmountChangeHandler} onBlur={updateAssetDataHandler}/></td>
         </tr>
     } else {
         content = <Popover trigger="click" placement="topLeft" content={popoverContent}>
             <tr>
-                <th>{assetName}</th>
-                <th>{Number.parseFloat(assetAmount).toFixed(2)}</th>
+                <td>{assetName}</td>
+                <td>{Number.parseFloat(assetAmount).toFixed(2)}</td>
             </tr>
         </Popover>
     }

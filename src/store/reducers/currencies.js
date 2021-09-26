@@ -1,5 +1,5 @@
 import * as currenciesActions from '../actions/currenciesActionTypes';
-import Currencies from "../../currencies/currencies";
+import CURRENCIES from "../../CURRENCIES";
 const inititalState = {
     currencies: []
 };
@@ -8,7 +8,7 @@ const reducer = (state = inititalState, action) => {
     switch (action.type) {
         case currenciesActions.SET_CURRENCIES:
             const currencies = action.currencies.filter(currency => {
-                if(currency.cc === Currencies.dollar.name || currency.cc === Currencies.zloty.name) {
+                if(currency.cc === CURRENCIES.dollar.name || currency.cc === CURRENCIES.zloty.name) {
                     return true;
                 }
             });

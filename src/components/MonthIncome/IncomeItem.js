@@ -3,7 +3,7 @@ import classes from './IncomeItem.module.css';
 
 import { useDispatch } from 'react-redux';
 import * as incomeActions from '../../store/actions/income';
-import Currencies from "../../currencies/currencies";
+import CURRENCIES from "../../CURRENCIES";
 import { Popover, Input, Select, Button } from 'antd';
 import {CheckSquareFilled} from "@ant-design/icons";
 
@@ -29,7 +29,7 @@ const IncomeItem = (props) => {
     }
 
     const selectChangeHandler = (value) => {
-        setCurrency(value);
+        setCurrency(CURRENCIES[value].name);
     }
 
     const editIncomeHandler = () => {
@@ -57,25 +57,25 @@ const IncomeItem = (props) => {
     let content;
     if(editMode) {
         content = <tr>
-            <th><Input type="text" id="incomeName" value={incomeName} onChange={incomeNameChangeHandler}/></th>
-            <th><Input type="number" id="incomeAmount" value={incomeAmount} onChange={incomeAmountChangeHandler}/></th>
-            <th>
+            <td><Input type="text" id="incomeName" value={incomeName} onChange={incomeNameChangeHandler}/></td>
+            <td><Input type="number" id="incomeAmount" value={incomeAmount} onChange={incomeAmountChangeHandler}/></td>
+            <td>
                 <Select defaultValue={currency} onChange={selectChangeHandler}>
-                    <Option value={Currencies.hryvna.id}>{Currencies.hryvna.name}</Option>
-                    <Option value={Currencies.dollar.id}>{Currencies.dollar.name}</Option>
-                    <Option value={Currencies.zloty.id}>{Currencies.zloty.name}</Option>
+                    <Option value={CURRENCIES.hryvna.id}>{CURRENCIES.hryvna.name}</Option>
+                    <Option value={CURRENCIES.dollar.id}>{CURRENCIES.dollar.name}</Option>
+                    <Option value={CURRENCIES.zloty.id}>{CURRENCIES.zloty.name}</Option>
                 </Select>
-            </th>
-            <th>
+            </td>
+            <td>
                 <CheckSquareFilled className={classes.icon} onClick={editIncomeHandler}/>
-            </th>
+            </td>
         </tr>
     } else {
         content = <Popover trigger="click" content={popoverContent} placement="topLeft">
             <tr>
-                <th>{props.name}</th>
-                <th>{Number.parseFloat(props.amount).toFixed(2)}</th>
-                <th>{props.currency}</th>
+                <td>{props.name}</td>
+                <td>{Number.parseFloat(props.amount).toFixed(2)}</td>
+                <td>{props.currency}</td>
             </tr>
         </Popover>
     }

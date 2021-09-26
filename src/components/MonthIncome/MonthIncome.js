@@ -4,7 +4,8 @@ import classes from './MonthIncome.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import * as incomeActions from '../../store/actions/income';
-import Currencies from "../../currencies/currencies";
+import CURRENCIES from '../../CURRENCIES';
+
 import {Input, Select} from 'antd';
 import IncomeItem from './IncomeItem';
 import {CheckSquareFilled} from '@ant-design/icons';
@@ -13,14 +14,15 @@ const { Option } = Select;
 const MonthIncome = () => {
     const [incomeName, setIncomeName] = useState(" ");
     const [incomeAmount, setIncomeAmount] = useState(0);
-    const [currency, setCurrency] = useState(Currencies.hryvna.name);
+    const [currency, setCurrency] = useState(CURRENCIES.hryvna.name);
     const [summary, setSummary] = useState(0);
 
-    const store = useSelector(state => state.income.incomes); //arr of income objects
+    const incomesStore = useSelector(state => state.income.incomes); //arr of income objects
+    const currencyStore = useSelector(state => state.currencies.currencies);
     const dispatch = useDispatch();
 
     const selectChangeHandler = (value) => {
-        setCurrency(value);
+        setCurrency(CURRENCIES[value].name);
     }
 
     const incomeNameInputHandler = (event) => {
@@ -40,37 +42,43 @@ const MonthIncome = () => {
             alert('Enter valid number');
             return;
         }
-        dispatch(incomeActions.addIncome(Math.random(), incomeName, incomeAmount, Currencies[currency].name));
+        dispatch(incomeActions.addIncome(Math.random(), incomeName, incomeAmount, currency));
         setIncomeAmount(0);
         setIncomeName(" ");
     }
 
-
-
     useEffect(() => {
         const calculateSummary = () => {
-            if(store.length <= 0) {
+            if(incomesStore.length <= 0) {
                 return;
             }
-            const sum = store.reduce((acc, currVal) => {
-                //add logic for different currencies
-                return acc + currVal.amount;
+            const sum = incomesStore.reduce((acc, currVal) => {
+                let amount = 0;
+                if(currVal.currency === CURRENCIES.hryvna.name) {
+                    amount += currVal.amount
+                } else {
+                    const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
+                    amount = currVal.amount * currencyWithRate.rate;
+                }
+                return acc + amount;
             }, 0);
             setSummary(sum);
         }
         calculateSummary();
-    },[store]);
+    },[incomesStore]);
 
   return(
       <div className={classes.container}>
           <table>
-              <tbody>
+              <thead>
                   <tr>
                       <th>Income name</th>
                       <th>Amount</th>
                       <th>Currency</th>
                   </tr>
-                  {store.map(income => {
+              </thead>
+              <tbody>
+                  {incomesStore.map(income => {
                       return (
                           <IncomeItem
                               key={income.id}
@@ -84,25 +92,25 @@ const MonthIncome = () => {
                   <tr>
                       <th>Summary:</th>
                       <th>{Number.parseFloat(summary).toFixed(2)}</th>
-                      <th>{Currencies.hryvna.name}</th>
+                      <th>{CURRENCIES.hryvna.name}</th>
                   </tr>
                   <tr>
-                      <th>
+                      <td>
                           <Input type="text" id="incomeName" value={incomeName} onChange={incomeNameInputHandler}/>
-                      </th>
-                      <th>
+                      </td>
+                      <td>
                           <Input type="number" id="incomeAmount" value={incomeAmount} onChange={incomeAmountInputHandler} />
-                      </th>
-                      <th>
+                      </td>
+                      <td>
                           <Select defaultValue={currency} onChange={selectChangeHandler}>
-                              <Option value={Currencies.hryvna.id}>{Currencies.hryvna.name}</Option>
-                              <Option value={Currencies.dollar.id}>{Currencies.dollar.name}</Option>
-                              <Option value={Currencies.zloty.id}>{Currencies.zloty.name}</Option>
+                              <Option value={CURRENCIES.hryvna.id}>{CURRENCIES.hryvna.name}</Option>
+                              <Option value={CURRENCIES.dollar.id}>{CURRENCIES.dollar.name}</Option>
+                              <Option value={CURRENCIES.zloty.id}>{CURRENCIES.zloty.name}</Option>
                           </Select>
-                      </th>
-                      <th>
+                      </td>
+                      <td>
                           <CheckSquareFilled className={classes.icon} onClick={addIncomeHandler}/>
-                      </th>
+                      </td>
                   </tr>
               </tbody>
           </table>
