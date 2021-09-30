@@ -7,7 +7,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import assetsReducer from './store/reducers/assets';
 import incomeReducer from './store/reducers/income';
-import currenciesReducer from "./store/reducers/currencies";
+import currenciesReducer from './store/reducers/currencies';
+import transactionReducer from './store/reducers/transactions';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     assets: assetsReducer,
     income: incomeReducer,
     currencies: currenciesReducer,
+    transactions: transactionReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

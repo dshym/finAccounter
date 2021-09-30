@@ -48,6 +48,7 @@ const reducer = (state = initialState, action) => {
             const countriesListForEditAsset = [...state.countries];
             let countryIndexForEditAsset = countriesListForEditAsset.findIndex(country =>
                 country.name === action.assetData.countryName);
+            console.log(countriesListForEditAsset[countryIndexForEditAsset].assets);
             let assetIndexForEdit = countriesListForEditAsset[countryIndexForEditAsset].assets.findIndex(asset =>
                 asset.id === action.assetData.id);
             countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].name = action.assetData.name;

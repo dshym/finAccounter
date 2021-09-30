@@ -12,7 +12,7 @@ function App() {
     const dispatch = useDispatch();
     useEffect(() => {
          dispatch(currencyActions.fetchCurrencies());
-    },[]);
+    },[dispatch]);
 
   return (
     <div className="App">

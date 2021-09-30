@@ -11,6 +11,7 @@ const reducer = (state = inititalState, action) => {
                 if(currency.cc === CURRENCIES.dollar.name || currency.cc === CURRENCIES.zloty.name) {
                     return true;
                 }
+                return false;
             });
             return {
                 currencies: currencies

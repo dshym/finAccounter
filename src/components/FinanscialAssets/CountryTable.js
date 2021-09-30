@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as assetActions from '../../store/actions/assets';
 import classes from './CountryTable.module.css';
@@ -12,6 +12,7 @@ const CountryTable = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [nameInput, setNameInput] = useState("");
     const [amountInput, setAmountInput] = useState(0);
+    const [tableContent, setTableContent] = useState();
 
     const dispatch = useDispatch();
     const store = useSelector(state => {
@@ -21,7 +22,7 @@ const CountryTable = (props) => {
     const openModalHandler = () => {
       setModalVisible(prevState => !prevState);
     }
-    
+
     const nameInputChangeHandler = (event) => {
         setNameInput(event.target.value);
     }
@@ -46,14 +47,17 @@ const CountryTable = (props) => {
         setAmountInput(0);
     }
 
-    let tableContent;
-    if(store.assets.length > 0) {
-        tableContent = store.assets.map(asset => {
-            return(
-                <AssetItem key={asset.id} assetData={asset} countryName={props.countryName}/>
-            );
-        });
-    }
+    useEffect(() => {
+        console.log(store.assets);
+            if(store.assets.length > 0) {
+                let content = store.assets.map(asset => {
+                    return (
+                        <AssetItem key={asset.id} assetData={asset} countryName={props.countryName}/>
+                    );
+                });
+                setTableContent(content);
+            }
+    },[props.countryName, assetsState]);
 
   return (
       <div className={classes.container}>

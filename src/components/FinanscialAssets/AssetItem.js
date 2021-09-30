@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import classes from './AssetItem.module.css';
 
 import { useDispatch } from 'react-redux';
@@ -7,8 +7,8 @@ import * as assetsActions from '../../store/actions/assets';
 import {Popover, Button, Input} from 'antd';
 
 const AssetItem = (props) => {
-    const [assetName, setAssetName] = useState(props.assetData.name);
-    const [assetAmount, setAssetAmount] = useState(props.assetData.amount);
+    const [assetName, setAssetName] = useState();
+    const [assetAmount, setAssetAmount] = useState();
     const [editMode, setEditMode] = useState(false);
     const dispatch = useDispatch();
 
@@ -47,6 +47,11 @@ const AssetItem = (props) => {
         <Button danger onClick={deleteAssetHandler}>Delete</Button>
     </div>
 
+    useEffect(() => {
+        setAssetName(props.assetData.name);
+        setAssetAmount(props.assetData.amount);
+    },[props.assetData.name, props.assetData.amount]);
+
     let content;
     if(editMode) {
         content = <tr>
@@ -57,7 +62,7 @@ const AssetItem = (props) => {
         content = <Popover trigger="click" placement="topLeft" content={popoverContent}>
             <tr>
                 <td>{assetName}</td>
-                <td>{Number.parseFloat(assetAmount).toFixed(2)}</td>
+                <td>{Number.parseFloat(props.assetData.amount).toFixed(2)}</td>
             </tr>
         </Popover>
     }

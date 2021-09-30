@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './ScreenLayout.module.css';
-import { Row, Col } from 'antd';
 
 const ScreenLayout = (props) => {
   return(

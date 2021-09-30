@@ -1,0 +1,14 @@
+.formContainer {
+
+}
+
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.topContainer p {
+    font-weight: bold;
+    font-size: 15px;
+}

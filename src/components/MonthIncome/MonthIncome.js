@@ -22,7 +22,7 @@ const MonthIncome = () => {
     const dispatch = useDispatch();
 
     const selectChangeHandler = (value) => {
-        setCurrency(CURRENCIES[value].name);
+        setCurrency(value);
     }
 
     const incomeNameInputHandler = (event) => {
@@ -55,7 +55,7 @@ const MonthIncome = () => {
             const sum = incomesStore.reduce((acc, currVal) => {
                 let amount = 0;
                 if(currVal.currency === CURRENCIES.hryvna.name) {
-                    amount += currVal.amount
+                    amount += Number.parseFloat(currVal.amount);
                 } else {
                     const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
                     amount = currVal.amount * currencyWithRate.rate;
@@ -65,7 +65,7 @@ const MonthIncome = () => {
             setSummary(sum);
         }
         calculateSummary();
-    },[incomesStore]);
+    },[incomesStore, currencyStore]);
 
   return(
       <div className={classes.container}>
@@ -90,11 +90,6 @@ const MonthIncome = () => {
                       );
                   })}
                   <tr>
-                      <th>Summary:</th>
-                      <th>{Number.parseFloat(summary).toFixed(2)}</th>
-                      <th>{CURRENCIES.hryvna.name}</th>
-                  </tr>
-                  <tr>
                       <td>
                           <Input type="text" id="incomeName" value={incomeName} onChange={incomeNameInputHandler}/>
                       </td>
@@ -103,14 +98,19 @@ const MonthIncome = () => {
                       </td>
                       <td>
                           <Select defaultValue={currency} onChange={selectChangeHandler}>
-                              <Option value={CURRENCIES.hryvna.id}>{CURRENCIES.hryvna.name}</Option>
-                              <Option value={CURRENCIES.dollar.id}>{CURRENCIES.dollar.name}</Option>
-                              <Option value={CURRENCIES.zloty.id}>{CURRENCIES.zloty.name}</Option>
+                              <Option value={CURRENCIES.hryvna.name}>{CURRENCIES.hryvna.name}</Option>
+                              <Option value={CURRENCIES.dollar.name}>{CURRENCIES.dollar.name}</Option>
+                              <Option value={CURRENCIES.zloty.name}>{CURRENCIES.zloty.name}</Option>
                           </Select>
                       </td>
                       <td>
                           <CheckSquareFilled className={classes.icon} onClick={addIncomeHandler}/>
                       </td>
+                  </tr>
+                  <tr>
+                      <th>Summary:</th>
+                      <th>{Number.parseFloat(summary).toFixed(2)}</th>
+                      <th>{CURRENCIES.hryvna.name}</th>
                   </tr>
               </tbody>
           </table>
