@@ -10,7 +10,6 @@ const FinancialAssets = () => {
     const store = useSelector(state => state.assets.countries);
     const dispatch = useDispatch();
 
-
     const newCountryInputChangeHandler = (event) => {
       setNewCountry(event.target.value);
     }
@@ -45,7 +44,6 @@ const FinancialAssets = () => {
                       <Input type="text" id="countryName" value={newCountry} onChange={newCountryInputChangeHandler}/>
                       <Button onClick={addCountryHandler} >Add country</Button>
                   </div>
-
               </div>
           </div>
       </Fragment>

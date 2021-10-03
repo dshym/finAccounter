@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import MainScreen from '../screens/MainScreen/MainScreen'
 import StatisticsScreen from '../screens/StatisticsScreen';
 import InvestmentScreen from '../screens/InvestmentsScreen';
+import AddTransactionScreen from "../screens/AddTransactionScreen";
 
 const NavigationSwitch = () => {
   return(
@@ -17,6 +18,9 @@ const NavigationSwitch = () => {
           </Route>
           <Route path="/investments">
               <InvestmentScreen/>
+          </Route>
+          <Route path="/add_transaction">
+              <AddTransactionScreen />
           </Route>
       </Switch>
   );

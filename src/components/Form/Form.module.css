@@ -1,11 +1,11 @@
 .formContainer {
-
+    width: 50%;
 }
 
 .topContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .topContainer p {

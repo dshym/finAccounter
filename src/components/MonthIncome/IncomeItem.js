@@ -29,7 +29,7 @@ const IncomeItem = (props) => {
     }
 
     const selectChangeHandler = (value) => {
-        setCurrency(CURRENCIES[value].name);
+        setCurrency(value);
     }
 
     const editIncomeHandler = () => {
@@ -61,9 +61,9 @@ const IncomeItem = (props) => {
             <td><Input type="number" id="incomeAmount" value={incomeAmount} onChange={incomeAmountChangeHandler}/></td>
             <td>
                 <Select defaultValue={currency} onChange={selectChangeHandler}>
-                    <Option value={CURRENCIES.hryvna.id}>{CURRENCIES.hryvna.name}</Option>
-                    <Option value={CURRENCIES.dollar.id}>{CURRENCIES.dollar.name}</Option>
-                    <Option value={CURRENCIES.zloty.id}>{CURRENCIES.zloty.name}</Option>
+                    <Option value={CURRENCIES.hryvna.name}>{CURRENCIES.hryvna.name}</Option>
+                    <Option value={CURRENCIES.dollar.name}>{CURRENCIES.dollar.name}</Option>
+                    <Option value={CURRENCIES.zloty.name}>{CURRENCIES.zloty.name}</Option>
                 </Select>
             </td>
             <td>

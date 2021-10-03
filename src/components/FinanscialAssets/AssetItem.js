@@ -42,15 +42,15 @@ const AssetItem = (props) => {
         setEditMode(prevState => !prevState);
     }
 
-    const popoverContent = <div className={classes.popover}>
-        <Button onClick={changeModeHandler}>Edit</Button>
-        <Button danger onClick={deleteAssetHandler}>Delete</Button>
-    </div>
-
     useEffect(() => {
         setAssetName(props.assetData.name);
         setAssetAmount(props.assetData.amount);
     },[props.assetData.name, props.assetData.amount]);
+
+    const popoverContent = <div className={classes.popover}>
+        <Button onClick={changeModeHandler}>Edit</Button>
+        <Button danger onClick={deleteAssetHandler}>Delete</Button>
+    </div>
 
     let content;
     if(editMode) {
@@ -62,7 +62,7 @@ const AssetItem = (props) => {
         content = <Popover trigger="click" placement="topLeft" content={popoverContent}>
             <tr>
                 <td>{assetName}</td>
-                <td>{Number.parseFloat(props.assetData.amount).toFixed(2)}</td>
+                <td>{Number.parseFloat(assetAmount).toFixed(2)}</td>
             </tr>
         </Popover>
     }

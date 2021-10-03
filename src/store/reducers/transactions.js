@@ -19,10 +19,22 @@ const reducer = (state = initialState, action) => {
             };
             return {
                 ...state,
-                incomeTransactions: state.incomeTransactions.concat(newIncome)
-            }
+                incomeTransactions: state.incomeTransactions.concat(newIncome),
+            };
         case transactionsActions.ADD_OUTCOME_TRANSCACTION:
-            return state;
+            const newOutcome = {
+                id: Math.random(),
+                name: action.transactionData.name,
+                category: action.transactionData.category,
+                amount: action.transactionData.amount,
+                additionalInfo: action.transactionData.additionalInfo,
+                date: action.transactionData.date,
+                accountId: action.transactionData.account,
+            };
+            return {
+                ...state,
+                outcomeTransactions: state.outcomeTransactions.concat(newOutcome),
+            };
         default:
             return state
     }

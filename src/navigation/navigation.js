@@ -19,7 +19,9 @@ const Navigation = () => {
               <Menu.Item key="investments">
                   <NavLink activeClassName={classes.navText} to="/investments">Investments</NavLink>
               </Menu.Item>
-
+              <Menu.Item key="addTransaction">
+                  <NavLink activeClassName={classes.navText} to="/add_transaction">Add transaction</NavLink>
+              </Menu.Item>
           </Menu>
           <CurrenciesTable/>
       </div>

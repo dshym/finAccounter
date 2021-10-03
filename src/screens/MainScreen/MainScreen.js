@@ -6,10 +6,8 @@ import { Divider } from 'antd';
 import ScreenLayout from '../../Layout/ScreenLayout';
 import FinancialAssets from '../../components/FinanscialAssets/FinancialAssets';
 import MonthIncome from '../../components/MonthIncome/MonthIncome';
-import Form from '../../components/Form/Form';
 
 import Column from '../../Layout/Column';
-
 const MainScreen = () => {
   return(
       <Fragment>
@@ -19,14 +17,12 @@ const MainScreen = () => {
                       <Column>
                           <Divider>Assets</Divider>
                           <FinancialAssets/>
-                          <Divider>Month income</Divider>
-                          <MonthIncome />
                       </Column>
                   }
                   rightContent={
                       <Column>
-                          <Divider>Add transaction</Divider>
-                          <Form />
+                          <Divider>Month income</Divider>
+                          <MonthIncome />
                       </Column>
                   } />
           </div>

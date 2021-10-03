@@ -55,13 +55,20 @@ const Form = () => {
           : transactionActionTypes.ADD_OUTCOME_TRANSCACTION;
       let selectedAsset;
       let selectedCountryName;
-      countriesList.forEach(country => {
-          selectedAsset = country.assets.find(asset => asset.id === selectedAssetId);
-          if(selectedAsset) {
-              selectedCountryName = country.name;
-          }
-      })
-        console.log(selectedAsset);
+      const BreakException = {};
+      try{
+          countriesList.forEach(country => {
+              selectedAsset = country.assets.find(asset => asset.id === selectedAssetId);
+              if(selectedAsset) {
+                  selectedCountryName = country.name;
+                  throw BreakException;
+              }
+          })
+      } catch (e) {
+          if (e !== BreakException) throw e;
+      }
+
+
         let newAmount = 0;
         if(transactionType === transactionActionTypes.ADD_INCOME_TRANSACTION) {
             newAmount = Number.parseFloat(selectedAsset.amount) + Number.parseFloat(amountInputRef.current.state.value);
@@ -69,8 +76,7 @@ const Form = () => {
             newAmount = selectedAsset.amount - Number.parseFloat(amountInputRef.current.state.value);
         }
         if(newAmount < 0) {
-            console.log(newAmount);
-            alert('Choose another asset');
+            alert('Choose another asset, asset amount will be < 0 after this transaction');
             return;
         }
       const newTransaction = {
@@ -80,7 +86,6 @@ const Form = () => {
           additionalInfo: addInfoInputRef.current.resizableTextArea.props.value ? addInfoInputRef.current.resizableTextArea.props.value : " ",
           date: selectedDate,
       };
-        console.log(newAmount);
       dispatch(trancactionActions.addTransaction(transactionType, newTransaction));
       dispatch(assetsActions.editAsset(selectedAssetId, selectedAsset.name, newAmount, selectedCountryName));
     }
