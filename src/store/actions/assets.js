@@ -1,5 +1,12 @@
 import * as actionType from './assetsActionTypes';
 
+export const setCountries = (countries) => {
+    return {
+        type: actionType.SET_ASSETS,
+        countries: countries
+    }
+}
+
 export const addCountry = (id, countryName) => {
     return {
         type: actionType.ADD_COUNTRY,

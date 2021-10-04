@@ -1,5 +1,12 @@
 import * as incomeActions from './incomeActionTypes';
 
+export const setIncomes = (incomes) => {
+    return {
+        type: incomeActions.SET_INCOMES,
+        incomes: incomes,
+    }
+}
+
 export const addIncome = (id, name, amount, currency) => {
     return {
         type: incomeActions.ADD_INCOME,

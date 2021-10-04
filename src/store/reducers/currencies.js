@@ -8,7 +8,7 @@ const reducer = (state = inititalState, action) => {
     switch (action.type) {
         case currenciesActions.SET_CURRENCIES:
             const currencies = action.currencies.filter(currency => {
-                if(currency.cc === CURRENCIES.dollar.name || currency.cc === CURRENCIES.zloty.name) {
+                if(currency.cc === CURRENCIES.USD.name || currency.cc === CURRENCIES.PLN.name) {
                     return true;
                 }
                 return false;

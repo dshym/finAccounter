@@ -14,7 +14,7 @@ const { Option } = Select;
 const MonthIncome = () => {
     const [incomeName, setIncomeName] = useState(" ");
     const [incomeAmount, setIncomeAmount] = useState(0);
-    const [currency, setCurrency] = useState(CURRENCIES.hryvna.name);
+    const [currency, setCurrency] = useState(CURRENCIES.UAH.name);
     const [summary, setSummary] = useState(0);
 
     const incomesStore = useSelector(state => state.income.incomes); //arr of income objects
@@ -42,7 +42,12 @@ const MonthIncome = () => {
             alert('Enter valid number');
             return;
         }
-        dispatch(incomeActions.addIncome(Math.random(), incomeName, incomeAmount, currency));
+        const currencyWithRate = currencyStore.find(curr => curr.cc === currency);
+        if(!currencyWithRate) {
+            dispatch(incomeActions.addIncome(Math.random(), incomeName, incomeAmount, currency, 1));
+        } else {
+            dispatch(incomeActions.addIncome(Math.random(), incomeName, incomeAmount, currency, currencyWithRate.rate));
+        }
         setIncomeAmount(0);
         setIncomeName(" ");
     }
@@ -54,11 +59,15 @@ const MonthIncome = () => {
             }
             const sum = incomesStore.reduce((acc, currVal) => {
                 let amount = 0;
-                if(currVal.currency === CURRENCIES.hryvna.name) {
+                if(currVal.currency === CURRENCIES.UAH.name) {
                     amount += Number.parseFloat(currVal.amount);
                 } else {
-                    const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
-                    amount = currVal.amount * currencyWithRate.rate;
+                    if(currencyStore.length <= 0) {
+                        amount = currVal.amount * currVal.rate;
+                    } else {
+                        const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
+                        amount = currVal.amount * currencyWithRate.rate;
+                    }
                 }
                 return acc + amount;
             }, 0);
@@ -98,9 +107,9 @@ const MonthIncome = () => {
                       </td>
                       <td>
                           <Select defaultValue={currency} onChange={selectChangeHandler}>
-                              <Option value={CURRENCIES.hryvna.name}>{CURRENCIES.hryvna.name}</Option>
-                              <Option value={CURRENCIES.dollar.name}>{CURRENCIES.dollar.name}</Option>
-                              <Option value={CURRENCIES.zloty.name}>{CURRENCIES.zloty.name}</Option>
+                              <Option value={CURRENCIES.UAH.name}>{CURRENCIES.UAH.name}</Option>
+                              <Option value={CURRENCIES.USD.name}>{CURRENCIES.USD.name}</Option>
+                              <Option value={CURRENCIES.PLN.name}>{CURRENCIES.PLN.name}</Option>
                           </Select>
                       </td>
                       <td>
@@ -110,7 +119,7 @@ const MonthIncome = () => {
                   <tr>
                       <th>Summary:</th>
                       <th>{Number.parseFloat(summary).toFixed(2)}</th>
-                      <th>{CURRENCIES.hryvna.name}</th>
+                      <th>{CURRENCIES.UAH.name}</th>
                   </tr>
               </tbody>
           </table>

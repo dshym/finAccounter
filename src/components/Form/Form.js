@@ -35,40 +35,42 @@ const Form = () => {
     }
 
     const formSubmitHandler = () => {
-      if(!nameInputRef.current.state.value || nameInputRef.current.state.value.trim().length <= 0) {
-          alert('Enter valid transaction name');
-          return;
-      }
-      if(!categoryInputRef.current.state.value || categoryInputRef.current.state.value.trim().length <= 0) {
-          alert('Enter valid category name');
-          return;
-      }
-      if(!amountInputRef.current.state.value || amountInputRef.current.state.value <= 0) {
-          alert('Enter number > 0');
-          return;
-      }
-      if(!selectedDate) {
-          alert('Select a date');
-          return;
-      }
-      let transactionType = switchPosition ? transactionActionTypes.ADD_INCOME_TRANSACTION
-          : transactionActionTypes.ADD_OUTCOME_TRANSCACTION;
-      let selectedAsset;
-      let selectedCountryName;
-      const BreakException = {};
-      try{
-          countriesList.forEach(country => {
-              selectedAsset = country.assets.find(asset => asset.id === selectedAssetId);
-              if(selectedAsset) {
-                  selectedCountryName = country.name;
-                  throw BreakException;
-              }
-          })
-      } catch (e) {
-          if (e !== BreakException) throw e;
-      }
-
-
+        if(selectedAssetId === 'addData') {
+            alert('Add assets');
+            return;
+        }
+        if(!nameInputRef.current.state.value || nameInputRef.current.state.value.trim().length <= 0) {
+            alert('Enter valid transaction name');
+            return;
+        }
+        if(!categoryInputRef.current.state.value || categoryInputRef.current.state.value.trim().length <= 0) {
+            alert('Enter valid category name');
+            return;
+        }
+        if(!amountInputRef.current.state.value || amountInputRef.current.state.value <= 0) {
+            alert('Enter number > 0');
+            return;
+        }
+        if(!selectedDate) {
+            alert('Select a date');
+            return;
+        }
+        let transactionType = switchPosition ? transactionActionTypes.ADD_INCOME_TRANSACTION
+            : transactionActionTypes.ADD_OUTCOME_TRANSCACTION;
+        let selectedAsset;
+        let selectedCountryName;
+        const BreakException = {};
+        try{
+            countriesList.forEach(country => {
+                selectedAsset = country.assets.find(asset => asset.id === selectedAssetId);
+                if(selectedAsset) {
+                    selectedCountryName = country.name;
+                    throw BreakException;
+                }
+            })
+        } catch (e) {
+            if (e !== BreakException) throw e;
+        }
         let newAmount = 0;
         if(transactionType === transactionActionTypes.ADD_INCOME_TRANSACTION) {
             newAmount = Number.parseFloat(selectedAsset.amount) + Number.parseFloat(amountInputRef.current.state.value);

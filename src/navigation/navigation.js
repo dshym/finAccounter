@@ -4,11 +4,13 @@ import { NavLink } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import classes from './Navigation.module.css';
 
-import { Menu } from 'antd';
+import {Menu} from 'antd';
 import CurrenciesTable from "../components/currencies/CurrenciesTable";
+import SaveButton from "../components/SaveButton/SaveButton";
+
 const Navigation = () => {
   return (
-      <div>
+      <React.Fragment>
           <Menu mode="horizontal">
               <Menu.Item key="main">
                   <NavLink activeClassName={classes.navText} to="/">Main</NavLink>
@@ -23,8 +25,12 @@ const Navigation = () => {
                   <NavLink activeClassName={classes.navText} to="/add_transaction">Add transaction</NavLink>
               </Menu.Item>
           </Menu>
-          <CurrenciesTable/>
-      </div>
+          <div className={classes.container}>
+              <CurrenciesTable/>
+              <SaveButton />
+          </div>
+
+      </React.Fragment>
 
   );
 }

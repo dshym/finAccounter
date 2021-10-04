@@ -6,12 +6,17 @@ const initialValue = {
 
 const reducer = (state = initialValue, action) => {
     switch (action.type) {
+        case incomeActions.SET_INCOMES:
+            return {
+                incomes: action.incomes
+            }
         case incomeActions.ADD_INCOME:
             const newIncome = {
                 id: action.incomeData.id,
                 name: action.incomeData.name,
                 amount: action.incomeData.amount,
-                currency: action.incomeData.currency
+                currency: action.incomeData.currency,
+                currencyRate: action.incomeData.currencyRate,
             }
             return {
                 incomes: state.incomes.concat(newIncome)

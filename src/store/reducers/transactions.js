@@ -7,6 +7,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case transactionsActions.SET_TRANSACTIONS:
+            return {
+                incomeTransactions: action.transactions.incomeTransactions,
+                outcomeTransactions: action.transactions.outcomeTransactions,
+            }
         case transactionsActions.ADD_INCOME_TRANSACTION:
             const newIncome = {
                 id: Math.random(),

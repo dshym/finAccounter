@@ -1,11 +1,11 @@
 const CURRENCIES = {
-    hryvna: {
+    UAH: {
         name: 'UAH'
     },
-    dollar: {
+    USD: {
         name: 'USD',
     },
-    zloty: {
+    PLN: {
         name: 'PLN'
     }
 }
