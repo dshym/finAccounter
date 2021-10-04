@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {Input, Modal} from 'antd';
+import {Input, Modal, Select} from 'antd';
 import * as assetActions from "../../store/actions/assets";
+import CURRENCIES from "../../CURRENCIES";
+
+const {Option} = Select;
 
 const CountryTableModal = (props) => {
     const [nameInput, setNameInput] = useState("");
     const [amountInput, setAmountInput] = useState(0);
+    const [currency, setCurrency] = useState(CURRENCIES.UAH.name);
+
+    const currenciesStore = useSelector(state => state.currencies.currencies);
 
     const dispatch = useDispatch();
 
@@ -19,6 +25,10 @@ const CountryTableModal = (props) => {
         setAmountInput(event.target.value);
     }
 
+    const selectChangeHandler = (value) => {
+        setCurrency(value);
+    }
+
     const addAssetHandler = () => {
         if(!nameInput.trim()) {
             alert('Input asset name');
@@ -28,10 +38,29 @@ const CountryTableModal = (props) => {
             alert('Amount should be > 0');
             return;
         }
-        //add asset to redux
-        dispatch(assetActions.addAsset(Math.random(), nameInput, Number.parseFloat(amountInput).toFixed(2), props.countryName));
+        const currencyWithRate = currenciesStore.find(curr => {
+            return curr.cc === currency;
+        });
+        if(currencyWithRate) {
+            dispatch(assetActions.addAsset(Math.random(),
+                nameInput,
+                Number.parseFloat(amountInput).toFixed(2),
+                props.countryName,
+                currency,
+                currencyWithRate.rate
+            ));
+        } else {
+            dispatch(assetActions.addAsset(Math.random(),
+                nameInput,
+                Number.parseFloat(amountInput).toFixed(2),
+                props.countryName,
+                currency,
+                1
+            ));
+        }
         setNameInput("");
         setAmountInput(0);
+        setCurrency(CURRENCIES.UAH.name);
         props.onCancel();
     };
   return(
@@ -41,6 +70,12 @@ const CountryTableModal = (props) => {
           <br/>
           <label htmlFor="amount">Amount</label><br/>
           <Input type="number" id="amount" value={amountInput} onChange={amountInputChangeHandler}/>
+          <p>Currency: </p>
+          <Select defaultValue={currency} onChange={selectChangeHandler}>
+              <Option value={CURRENCIES.UAH.name}>{CURRENCIES.UAH.name}</Option>
+              <Option value={CURRENCIES.USD.name}>{CURRENCIES.USD.name}</Option>
+              <Option value={CURRENCIES.PLN.name}>{CURRENCIES.PLN.name}</Option>
+          </Select>
       </Modal>
   );
 }

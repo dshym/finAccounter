@@ -39,6 +39,7 @@ const CountryTable = (props) => {
                   <tr>
                       <th>Asset name</th>
                       <th>Amount</th>
+                      <th>Currency</th>
                   </tr>
               </thead>
               <tbody>

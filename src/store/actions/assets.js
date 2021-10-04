@@ -31,7 +31,7 @@ export const editCountry = (id, newName) => {
     }
 }
 
-export const addAsset = (id, name, amount, country) => {
+export const addAsset = (id, name, amount, country, currency, rate) => {
     return {
         type: actionType.ADD_ASSET,
         assetData: {
@@ -39,18 +39,22 @@ export const addAsset = (id, name, amount, country) => {
             name: name,
             amount: amount,
             country: country,
+            currency: currency,
+            rate: rate
         }
     }
 }
 
-export const editAsset = (id, newName, newAmount, countryName) => {
+export const editAsset = (id, newName, newAmount, countryName, currency, rate) => {
     return {
         type: actionType.EDIT_ASSET,
         assetData: {
             id: id,
             name: newName,
             amount: newAmount,
-            countryName: countryName
+            countryName: countryName,
+            currency: currency,
+            rate: rate,
         }
     }
 }

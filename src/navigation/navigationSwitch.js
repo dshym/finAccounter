@@ -14,7 +14,7 @@ const NavigationSwitch = () => {
               <MainScreen/>
           </Route>
           <Route path="/statistics">
-              <StatisticsScreen/>
+              <StatisticsScreen />
           </Route>
           <Route path="/investments">
               <InvestmentScreen/>

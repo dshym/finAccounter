@@ -40,6 +40,8 @@ const reducer = (state = initialState, action) => {
                 id: action.assetData.id,
                 name: action.assetData.name,
                 amount: action.assetData.amount,
+                currency: action.assetData.currency,
+                rate: action.assetData.rate,
             };
             const countriesListForAddAsset = [...state.countries];
             const countryIndexForAddAsset = countriesListForAddAsset.findIndex(country =>
@@ -56,6 +58,8 @@ const reducer = (state = initialState, action) => {
                 asset.id === action.assetData.id);
             countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].name = action.assetData.name;
             countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].amount = action.assetData.amount;
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].currency = action.assetData.currency;
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].rate = action.assetData.rate;
             return {
                 countries: countriesListForEditAsset
             }
