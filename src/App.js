@@ -19,6 +19,9 @@ function App() {
          dispatch(currencyActions.fetchCurrencies());
          const jsonData = localStorage.getItem('UserData');
          const userData = JSON.parse(jsonData);
+         if(!userData){
+             return;
+         }
          dispatch(currencyActions.setCurrenciesFromStorage(userData.currencies));
          dispatch(assetsActions.setCountries(userData.assets.countries));
          dispatch(incomeActions.setIncomes(userData.income.incomes));

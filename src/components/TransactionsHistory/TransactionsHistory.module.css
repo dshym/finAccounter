@@ -1,0 +1,13 @@
+.historyContainer {
+    height: 500px;
+    padding: 10px;
+}
+
+.content {
+    height: 490px;
+    overflow: auto;
+}
+
+.content p {
+    margin: 0px;
+}

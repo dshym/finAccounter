@@ -1,0 +1,28 @@
+.container {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.formColumn {
+    width: 60%;
+    padding: 20px;
+}
+
+.historyColumn {
+    width: 40%;
+    padding: 20px;
+}
+
+@media screen and (max-width: 760px) {
+    .container {
+        flex-direction: column;
+    }
+    .formColumn {
+        width: 100%;
+    }
+    .historyColumn {
+        width: 100%;
+    }
+}

@@ -87,6 +87,8 @@ const Form = () => {
           amount: amountInputRef.current.state.value,
           additionalInfo: addInfoInputRef.current.resizableTextArea.props.value ? addInfoInputRef.current.resizableTextArea.props.value : " ",
           date: selectedDate,
+          type: transactionType === transactionActionTypes.ADD_INCOME_TRANSACTION ? 'income' : 'outcome',
+          currency: selectedAsset.currency,
       };
       dispatch(trancactionActions.addTransaction(transactionType, newTransaction));
       dispatch(assetsActions.editAsset(selectedAssetId, selectedAsset.name, newAmount, selectedCountryName));
@@ -111,6 +113,7 @@ const Form = () => {
              <label htmlFor='amount'>
                  Amount:
                  <Input type='number' id='amount' ref={amountInputRef} />
+
              </label>
              <label htmlFor='additionalInfo'>
                  Additional info:
@@ -122,7 +125,7 @@ const Form = () => {
              <Select defaultValue={"Select asset"} style={{width: 400, marginBottom: 10}} onChange={selectHandler}>
                  {countriesList.length > 0 ? countriesList.map(country => {
                      return country.assets.map(asset => {
-                         return <Option  value={asset.id}>{asset.name} {asset.amount}</Option>
+                         return <Option  value={asset.id}>{asset.name} {asset.amount} {asset.currency}</Option>
                      })
                  }) : <Option value={"addData"}>Add assets</Option> }
              </Select>

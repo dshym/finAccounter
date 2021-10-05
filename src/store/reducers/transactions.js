@@ -21,6 +21,8 @@ const reducer = (state = initialState, action) => {
                 additionalInfo: action.transactionData.additionalInfo,
                 date: action.transactionData.date,
                 accountId: action.transactionData.account,
+                type: action.transactionData.type,
+                currency: action.transactionData.currency,
             };
             return {
                 ...state,
@@ -35,6 +37,8 @@ const reducer = (state = initialState, action) => {
                 additionalInfo: action.transactionData.additionalInfo,
                 date: action.transactionData.date,
                 accountId: action.transactionData.account,
+                type: action.transactionData.type,
+                currency: action.transactionData.currency,
             };
             return {
                 ...state,

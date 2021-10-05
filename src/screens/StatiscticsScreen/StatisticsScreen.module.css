@@ -10,3 +10,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.chartContainer p {
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.rigthColumn {
+    display: flex;
+    flex-direction: column;
+}

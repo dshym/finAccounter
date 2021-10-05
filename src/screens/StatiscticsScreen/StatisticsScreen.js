@@ -4,7 +4,8 @@ import classes from './StatisticsScreen.module.css';
 import { useSelector } from 'react-redux';
 
 import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
-import AssetsTotalSum from "../components/AssetsSum/AssetsTotalSum";
+import AssetsTotalSum from "../../components/AssetsSum/AssetsTotalSum";
+import TransactionsFilter from "../../components/TransactionsFilter/TransactionsFilter";
 
 const StatisticsScreen = () => {
     const [chartData, setChartData] = useState([]);
@@ -50,7 +51,11 @@ const StatisticsScreen = () => {
                   <Tooltip/>
               </PieChart>
           </div>
-          <AssetsTotalSum />
+          <div className={classes.rigthColumn}>
+              <AssetsTotalSum />
+              <TransactionsFilter />
+          </div>
+
       </div>
 
   );

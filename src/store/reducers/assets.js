@@ -58,8 +58,12 @@ const reducer = (state = initialState, action) => {
                 asset.id === action.assetData.id);
             countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].name = action.assetData.name;
             countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].amount = action.assetData.amount;
-            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].currency = action.assetData.currency;
-            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].rate = action.assetData.rate;
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].currency =
+                action.assetData.currency ? action.assetData.currency
+                    : countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].currency;
+            countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].rate =
+                action.assetData.rate ? action.assetData.rate
+                    : countriesListForEditAsset[countryIndexForEditAsset].assets[assetIndexForEdit].rate;
             return {
                 countries: countriesListForEditAsset
             }

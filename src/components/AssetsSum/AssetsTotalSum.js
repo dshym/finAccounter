@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
+import classes from './AssetsTotalSum.module.css';
 import { useSelector } from 'react-redux';
 
 const AssetsTotalSum = () => {
@@ -22,7 +22,7 @@ const AssetsTotalSum = () => {
 
 
   return(
-      <div>
+      <div className={classes.container}>
           <p>Total assets sum: {Number.parseFloat(sum).toFixed(2)} UAH</p>
       </div>
   );
