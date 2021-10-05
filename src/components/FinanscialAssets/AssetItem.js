@@ -61,7 +61,7 @@ const AssetItem = (props) => {
         setAssetName(props.assetData.name);
         setAssetAmount(props.assetData.amount);
         setCurrency(props.assetData.currency);
-    },[props.assetData.name, props.assetData.amount]);
+    },[props.assetData]);
 
     const popoverContent = <div className={classes.popover}>
         <Button onClick={changeModeHandler}>Edit</Button>
@@ -74,7 +74,7 @@ const AssetItem = (props) => {
             <td><Input type="text" id="name" value={assetName} onChange={assetNameChangeHandler} onBlur={updateAssetDataHandler}/></td>
             <td><Input type="number" id="amount" value={assetAmount} onChange={assetAmountChangeHandler} onBlur={updateAssetDataHandler}/></td>
             <td>
-                <Select defaultValue={currency} onChange={selectChangeHandler} onBlur={updateAssetDataHandler}>
+                <Select defaultValue={currency} onChange={selectChangeHandler} onBlur={updateAssetDataHandler   }>
                     <Option value={CURRENCIES.UAH.name}>{CURRENCIES.UAH.name}</Option>
                     <Option value={CURRENCIES.USD.name}>{CURRENCIES.USD.name}</Option>
                     <Option value={CURRENCIES.PLN.name}>{CURRENCIES.PLN.name}</Option>
