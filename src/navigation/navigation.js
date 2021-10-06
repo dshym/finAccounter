@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
 import classes from './Navigation.module.css';
-
-import {Menu} from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import {Menu,Avatar} from 'antd';
 import CurrenciesTable from "../components/currencies/CurrenciesTable";
 import SaveButton from "../components/SaveButton/SaveButton";
 
@@ -28,6 +28,7 @@ const Navigation = () => {
           <div className={classes.container}>
               <CurrenciesTable/>
               <SaveButton />
+              <Avatar shape="square" size="large" icon={<UserOutlined />} />
           </div>
 
       </React.Fragment>
