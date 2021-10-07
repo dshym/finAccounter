@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { Empty } from 'antd';
+
 const InvestmentsScreen = () => {
     return(
-        <div>
-            Investments Screen
-        </div>
+        <React.Fragment>
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={"In development..."} />
+        </React.Fragment>
     );
 }
 

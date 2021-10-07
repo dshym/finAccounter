@@ -13,7 +13,7 @@ const SaveButton = () => {
   }
 
   return(
-      <Button type="dashed" icon={<SaveOutlined />} onClick={saveData} >Save data to localStorage</Button>
+      <Button danger type="dashed" icon={<SaveOutlined />} onClick={saveData} >Save data to localStorage</Button>
   );
 }
 
