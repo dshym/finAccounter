@@ -34,7 +34,7 @@ const StatisticsScreen = () => {
   return(
       <div className={classes.statContainer}>
           <div className={classes.chartContainer}>
-              <p>Stats in UAH</p>
+              <AssetsTotalSum />
               <PieChart width={400} height={400}>
                   <Pie
                       dataKey="value"
@@ -52,10 +52,8 @@ const StatisticsScreen = () => {
               </PieChart>
           </div>
           <div className={classes.rigthColumn}>
-              <AssetsTotalSum />
               <TransactionsFilter />
           </div>
-
       </div>
 
   );

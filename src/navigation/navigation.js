@@ -30,9 +30,7 @@ const Navigation = () => {
               <SaveButton />
               <Avatar shape="square" size="large" icon={<UserOutlined />} />
           </div>
-
       </React.Fragment>
-
   );
 }
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 
 import { useDispatch } from 'react-redux';
 import * as currencyActions from './store/actions/currencies';
@@ -30,7 +29,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div>
         <MainLayout mainContent={<NavigationSwitch />}>
             <Navigation />
         </MainLayout>

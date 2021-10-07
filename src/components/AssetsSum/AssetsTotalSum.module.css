@@ -2,6 +2,7 @@
 
 }
 .container p {
+    margin: 0px;
     font-size: large;
     font-weight: bold;
 }

@@ -5,7 +5,7 @@ const { Content } = Layout;
 
 const MainLayout = (props) => {
     return (
-        <Layout>
+        <Layout style={{background: '#e9f1f7'}}>
             {props.children}
             <Content>
                 {props.mainContent}
