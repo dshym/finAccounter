@@ -7,6 +7,7 @@ import { UserOutlined } from '@ant-design/icons';
 import {Menu,Avatar} from 'antd';
 import CurrenciesTable from "../components/currencies/CurrenciesTable";
 import SaveButton from "../components/SaveButton/SaveButton";
+import Authenctication from "../components/Authentication/Authenctication";
 
 const Navigation = () => {
   return (
@@ -28,7 +29,8 @@ const Navigation = () => {
           <div className={classes.container}>
               <CurrenciesTable/>
               <SaveButton />
-              <Avatar shape="square" size="large" icon={<UserOutlined />} />
+              <Authenctication/>
+              {/*<Avatar shape="square" size="large" icon={<UserOutlined />} />*/}
           </div>
       </React.Fragment>
   );

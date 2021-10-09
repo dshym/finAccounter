@@ -8,8 +8,6 @@ import FinancialAssets from '../../components/FinanscialAssets/FinancialAssets';
 import MonthIncome from '../../components/MonthIncome/MonthIncome';
 import Column from '../../Layout/Column';
 
-import Authentication from '../../components/Authentication/Authenctication';
-
 const MainScreen = () => {
   return(
       <Fragment>
@@ -17,7 +15,6 @@ const MainScreen = () => {
               <ScreenLayout
                   leftContent={
                       <Column>
-                          <Authentication />
                           <Divider>Assets</Divider>
                           <FinancialAssets/>
                       </Column>

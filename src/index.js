@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { initializeApp } from "firebase/app";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -11,6 +10,8 @@ import incomeReducer from './store/reducers/income';
 import currenciesReducer from './store/reducers/currencies';
 import transactionReducer from './store/reducers/transactions';
 import authReducer from './store/reducers/auth';
+import firebaseReducer from './store/reducers/firebase';
+
 import { firebaseConfig } from './env';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -23,10 +24,10 @@ const rootReducer = combineReducers({
     currencies: currenciesReducer,
     transactions: transactionReducer,
     auth: authReducer,
+    firebase: firebaseReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
-const app = initializeApp(firebaseConfig);
 
 ReactDOM.render(
     <Provider store={store}>
