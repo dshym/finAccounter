@@ -10,8 +10,15 @@ export const setData = (userData) => {
     }
 }
 
+export const setFirebaseLoading = () => {
+    return {
+        type: firebaseActions.SET_FIREBASE_LOADING,
+    }
+}
+
 export const saveData = (userId, userData, token) => {
     return async dispatch => {
+        dispatch(setFirebaseLoading());
         try {
             const response = fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
                 method: 'PUT',
@@ -26,8 +33,10 @@ export const saveData = (userId, userData, token) => {
             res.then(data => {
                 console.log(data);
             })
+            dispatch(setFirebaseLoading());
         } catch (e) {
             console.log(e);
+            dispatch(setFirebaseLoading());
         }
     }
 }
@@ -43,6 +52,9 @@ export const getData = (userId, token) => {
             }).then(response => {
                 return response.json();
             }).then(data => {
+                if(data === null) {
+                    return;
+                }
                 dispatch(assetsActions.setCountries(data.userData.assets.countries));
                 dispatch(incomeActions.setIncomes(data.userData.income.incomes));
                 dispatch(transactionsActions.setTransactions(data.userData.transactions));
