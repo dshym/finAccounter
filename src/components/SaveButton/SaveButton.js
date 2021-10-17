@@ -13,16 +13,18 @@ const SaveButton = () => {
   const dispatch = useDispatch();
 
 
-  const saveData = () => {
+  const saveData = async () => {
     //localStorage.setItem('UserData', JSON.stringify(store));
     if(userDataStore.userId === null || userDataStore.token === null) {
       alert('Sign up or log in, to save data on the server');
       return;
     }
-    delete userData.auth;
-    delete userData.firebase;
-    console.log(userData);
-    //dispatch(firebaseActions.saveData(userDataStore.userId, userData, userDataStore.token));
+
+    const dataToSave = { ...userData };
+
+    delete dataToSave.auth;
+    delete dataToSave.firebase;
+    dispatch(firebaseActions.saveData(userDataStore.userId, dataToSave, userDataStore.token));
   }
 
   return(

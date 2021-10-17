@@ -12,7 +12,6 @@ import transactionReducer from './store/reducers/transactions';
 import authReducer from './store/reducers/auth';
 import firebaseReducer from './store/reducers/firebase';
 
-import { firebaseConfig } from './env';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

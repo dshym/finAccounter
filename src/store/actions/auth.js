@@ -1,13 +1,7 @@
 import * as authActionTypes from './authActionTypes';
+import * as firebaseActions from './firebase';
 
 import { firebaseConfig } from '../../env';
-import {set} from "firebase/firebase-database";
-
-export const setLoading = () => {
-    return {
-        type: authActionTypes.SET_LOADING
-    }
-}
 
 export const authenticate = (userId, token) => {
     return {
@@ -21,7 +15,6 @@ export const authenticate = (userId, token) => {
 
 export const signUp = (email, password) => {
     return async dispatch => {
-        dispatch(setLoading());
         const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}`, {
                 method: 'POST',
                 headers: {
@@ -47,13 +40,12 @@ export const signUp = (email, password) => {
 
         const resData = await response.json();
         dispatch(authenticate(resData.localId, resData.idToken));
-        dispatch(setLoading());
     }
 }
 
 export const login = (email, password) => {
     return async dispatch => {
-        dispatch(setLoading());
+
         const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`,
             {
                 method: 'POST',
@@ -82,7 +74,7 @@ export const login = (email, password) => {
 
         const resData = await response.json();
         dispatch(authenticate(resData.localId, resData.idToken));
-        dispatch(setLoading());
+        dispatch(firebaseActions.getData(resData.localId, resData.idToken));
     };
 };
 

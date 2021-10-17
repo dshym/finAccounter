@@ -1,15 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import classes from './Navigation.module.css';
-import { UserOutlined } from '@ant-design/icons';
-import {Menu,Avatar} from 'antd';
+import {Menu} from 'antd';
 import CurrenciesTable from "../components/currencies/CurrenciesTable";
-import SaveButton from "../components/SaveButton/SaveButton";
 import Authenctication from "../components/Authentication/Authenctication";
 
 const Navigation = () => {
+
   return (
       <React.Fragment>
           <Menu mode="horizontal">
@@ -28,9 +27,7 @@ const Navigation = () => {
           </Menu>
           <div className={classes.container}>
               <CurrenciesTable/>
-              <SaveButton />
               <Authenctication/>
-              {/*<Avatar shape="square" size="large" icon={<UserOutlined />} />*/}
           </div>
       </React.Fragment>
   );

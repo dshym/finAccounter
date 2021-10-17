@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import * as authActions from '../../store/actions/auth';
-import {Button, Input} from 'antd';
-import validator from 'validator';
+import { useSelector } from 'react-redux';
+
 
 import AuthForm from './AuthForm';
 import Profile from '../Profile/Profile';
@@ -14,6 +12,7 @@ const Authenctication = () => {
 
   return(
       <div>
+          {userDataStore.userId === null && <p>Log in or sing up to enable saving data</p>}
           {userDataStore.userId === null ? <AuthForm/> : <Profile/>}
       </div>
   );

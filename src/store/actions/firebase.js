@@ -1,10 +1,7 @@
 import * as firebaseActions from './firebaseActionTypes';
-
-export const setLoading = () => {
-    return {
-        type: firebaseActions.SET_DATA
-    }
-}
+import * as assetsActions from './assets';
+import * as incomeActions from './income';
+import * as transactionsActions from './transactions';
 
 export const setData = (userData) => {
     return {
@@ -14,9 +11,8 @@ export const setData = (userData) => {
 }
 
 export const saveData = (userId, userData, token) => {
-    return async (dispatch) => {
+    return async dispatch => {
         try {
-            dispatch(setLoading());
             const response = fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
                 method: 'PUT',
                 headers: {
@@ -30,10 +26,8 @@ export const saveData = (userId, userData, token) => {
             res.then(data => {
                 console.log(data);
             })
-            dispatch(setLoading());
         } catch (e) {
             console.log(e);
-            dispatch(setLoading());
         }
     }
 }
@@ -41,20 +35,22 @@ export const saveData = (userId, userData, token) => {
 export const getData = (userId, token) => {
     return async dispatch => {
         try {
-            const response = fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
+            fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                dispatch(assetsActions.setCountries(data.userData.assets.countries));
+                dispatch(incomeActions.setIncomes(data.userData.income.incomes));
+                dispatch(transactionsActions.setTransactions(data.userData.transactions));
             });
-            const jsonData = (await response).json();
-            jsonData.then(data => {
-                console.log(data);
-            })
-            dispatch(setLoading());
         } catch (e) {
             console.log(e);
-            dispatch(setLoading());
         }
+
     }
 }
+

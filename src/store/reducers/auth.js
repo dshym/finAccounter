@@ -3,7 +3,6 @@ import * as authActionTypes from '../actions/authActionTypes';
 const initialState = {
     token: null,
     userId: null,
-    loading: false,
 };
 
 const reducer = (state = initialState, action) => {

@@ -7,8 +7,7 @@ import {Select, Timeline} from "antd";
 
 const {Option} = Select;
 
-const TransactionsFilter = () => {
-  const [categoriesList, setCategoriesList] = useState([]);
+const TransactionsFilter = () => {;
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Choose category');
   const transactionStore = useSelector(state => state.transactions);
@@ -29,27 +28,35 @@ const TransactionsFilter = () => {
     setFilteredTransactions(filteredArr);
   }
 
-  useEffect(() => {
+  const categoriesForSelect = [];
+  if(transactionStore.incomeTransactions.length > 0 || transactionStore.outcomeTransactions.length > 0) {
     const categories = [];
-    const filteredCategories = new Set();
+    const uniqueCategories = new Set();
+
     for (const key in transactionStore) {
       transactionStore[key].forEach(transaction => {
         categories.push(transaction.category);
       });
     }
-    categories.forEach(category => {
-      filteredCategories.add(category);
+    categories.forEach(cat => {
+      uniqueCategories.add(cat);
     });
-    setCategoriesList([...filteredCategories]);
-  }, [transactionStore]);
+    uniqueCategories.forEach(cat => {
+      categoriesForSelect.push(cat);
+    })
+  }
 
-  if(categoriesList.length > 0) {
+  // useEffect(() => {
+  //   selectChangeHandler();
+  // }, [transactionStore]);
+
+  if(categoriesForSelect.length > 0) {
 
     return (
       <div>
         <strong><p>Transaction filter</p></strong>
         <Select defaultValue={selectedCategory} onChange={selectChangeHandler} className={classes.select}>
-          {categoriesList.map(category => {
+          {categoriesForSelect.map(category => {
             return <Option key={category} value={category}>{category}</Option>
           })}
         </Select>

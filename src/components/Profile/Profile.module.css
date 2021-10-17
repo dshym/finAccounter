@@ -1,0 +1,9 @@
+.profileContainer {
+    display: flex;
+    width: 200px;
+    background: azure;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+}

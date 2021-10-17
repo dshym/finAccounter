@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Input} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import validator from "validator";
 import * as authActions from "../../store/actions/auth";
+import * as assetsActions from  '../../store/actions/assets';
+import * as firebaseActions from '../../store/actions/firebase';
 
 const AuthForm = () => {
+    const auth = useSelector(state => state.auth);
+    const fetchedData = useSelector(state => state.firebase.userData);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userName, setUserName] = useState('');
     const [authMode, setAuthMode] = useState(true); //true - sign up, false - sign in
 
     const dispatch = useDispatch();
@@ -24,15 +27,7 @@ const AuthForm = () => {
         setPassword(event.target.value);
     }
 
-    const userNameChangeHandler = (event) => {
-        setUserName(event.target.value);
-    }
-
     const signUpHandler = () => {
-        if(validator.isEmpty(userName)) {
-            alert('Enter user name');
-            return;
-        }
         if(!validator.isEmail(email)) {
             alert('Enter valid email');
             return;
@@ -44,7 +39,7 @@ const AuthForm = () => {
         dispatch(authActions.signUp(email, password));
     }
 
-    const signInHandler = () => {
+    const signInHandler = async () => {
         if(!validator.isEmail(email)) {
             alert('Enter valid email');
             return;
@@ -67,10 +62,6 @@ const AuthForm = () => {
 
   return(
       <form onSubmit={formSubmitHandler} style={{width: 300}}>
-          {authMode && <label htmlFor='userName'>
-              User name:
-              <Input id='userName' type='text' value={userName} onChange={userNameChangeHandler}/>
-          </label>}
           <label htmlFor='email'>
               Email:
               <Input id='email' type="email" value={email} onChange={emailChangeHandler}/>
