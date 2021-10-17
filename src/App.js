@@ -14,16 +14,16 @@ function App() {
     const dispatch = useDispatch();
     useEffect(() => {
          dispatch(currencyActions.fetchCurrencies());
-         const jsonData = localStorage.getItem('UserData');
-         const userData = JSON.parse(jsonData);
-         if(!userData){
-             return;
-         } else {
-             dispatch(currencyActions.setCurrenciesFromStorage(userData.currencies));
-             dispatch(assetsActions.setCountries(userData.assets.countries));
-             dispatch(incomeActions.setIncomes(userData.income.incomes));
-             dispatch(transactionsActions.setTransactions(userData.transactions));
-        }
+        //  const jsonData = localStorage.getItem('UserData');
+        //  const userData = JSON.parse(jsonData);
+        //  if(!userData){
+        //      return;
+        //  } else {
+        //      dispatch(currencyActions.setCurrenciesFromStorage(userData.currencies));
+        //      dispatch(assetsActions.setCountries(userData.assets.countries));
+        //      dispatch(incomeActions.setIncomes(userData.income.incomes));
+        //      dispatch(transactionsActions.setTransactions(userData.transactions));
+        // }
     },[dispatch]);
 
   return (

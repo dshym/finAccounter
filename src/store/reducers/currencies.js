@@ -14,6 +14,7 @@ const reducer = (state = inititalState, action) => {
                 return false;
             });
             return {
+                ...state,
                 currencies: currencies
             }
         default:

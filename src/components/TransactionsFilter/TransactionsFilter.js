@@ -46,10 +46,6 @@ const TransactionsFilter = () => {;
     })
   }
 
-  // useEffect(() => {
-  //   selectChangeHandler();
-  // }, [transactionStore]);
-
   if(categoriesForSelect.length > 0) {
 
     return (

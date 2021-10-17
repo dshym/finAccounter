@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import classes from './AuthForm.module.css';
+
 import {Button, Input} from "antd";
+import CustomSpiner from "../CustomSpiner/CustomSpiner";
 import {useDispatch, useSelector} from "react-redux";
 import validator from "validator";
 import * as authActions from "../../store/actions/auth";
-import * as assetsActions from  '../../store/actions/assets';
-import * as firebaseActions from '../../store/actions/firebase';
+
 
 const AuthForm = () => {
     const auth = useSelector(state => state.auth);
-    const fetchedData = useSelector(state => state.firebase.userData);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [authMode, setAuthMode] = useState(true); //true - sign up, false - sign in
@@ -71,15 +72,15 @@ const AuthForm = () => {
               <Input id='password' type='password' value={password} onChange={passwordChangeHandler}/>
           </label>
           {authMode ?
-              <React.Fragment>
-                  <Input type='submit' value='Sign up'/>
+              <div className={classes.buttonContainer}>
+                  {auth.authLoading ? <CustomSpiner/> : <Input type='submit' value='Sign up'/>}
                   <Button size='small' type='text' onClick={changeAuthModeHandler}>Sign in</Button>
-              </React.Fragment>
+              </div>
               :
-              <React.Fragment>
-                  <Input type='submit' value='Sign in'/>
+              <div className={classes.buttonContainer}>
+                  {auth.authLoading ? <CustomSpiner/> : <Input type='submit' value='Sign in'/>}
                   <Button size='small' type='text' onClick={changeAuthModeHandler}>Sign up</Button>
-              </React.Fragment>
+              </div>
           }
       </form>
   );

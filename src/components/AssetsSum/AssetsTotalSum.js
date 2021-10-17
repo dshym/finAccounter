@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import classes from './AssetsTotalSum.module.css';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,6 @@ const AssetsTotalSum = () => {
             summary += sum;
         })
     }
-
 
   return(
       <div className={classes.container}>

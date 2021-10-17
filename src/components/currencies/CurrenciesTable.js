@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 const CurrenciesTable = () => {
     const store = useSelector(state => state.currencies.currencies);
+
   return(
       <div className={classes.container}>
           <table>
