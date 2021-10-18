@@ -6,7 +6,6 @@ import CustomSpiner from "../CustomSpiner/CustomSpiner";
 import {useDispatch, useSelector} from "react-redux";
 import validator from "validator";
 import * as authActions from "../../store/actions/auth";
-import * as firebaseActions from '../../store/actions/firebase';
 
 const AuthForm = () => {
     const auth = useSelector(state => state.auth);
@@ -38,7 +37,6 @@ const AuthForm = () => {
             return;
         };
         dispatch(authActions.signUp(email, password));
-        //dispatch()
     }
 
     const signInHandler = async () => {

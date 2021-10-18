@@ -19,11 +19,13 @@ const TransactionsFilter = () => {;
     }
     const filteredArr = [];
     for (const key in transactionStore) {
-      transactionStore[key].forEach(transaction => {
-        if(transaction.category === value) {
-          filteredArr.push(transaction);
-        }
-      })
+      if(transactionStore[key] !== 0) {
+        transactionStore[key].forEach(transaction => {
+          if(transaction.category === value) {
+            filteredArr.push(transaction);
+          }
+        })
+      }
     }
     setFilteredTransactions(filteredArr);
   }
@@ -34,9 +36,11 @@ const TransactionsFilter = () => {;
     const uniqueCategories = new Set();
 
     for (const key in transactionStore) {
-      transactionStore[key].forEach(transaction => {
-        categories.push(transaction.category);
-      });
+      if(transactionStore[key] !== 0) {
+        transactionStore[key].forEach(transaction => {
+          categories.push(transaction.category);
+        });
+      }
     }
     categories.forEach(cat => {
       uniqueCategories.add(cat);

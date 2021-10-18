@@ -16,10 +16,14 @@ const StatisticsScreen = () => {
         if(assetsStore.countries.length > 0) {
             let chartData = [];
             assetsStore.countries.forEach(country => {
-                let countryAssetsSum = country.assets.reduce((acc, currAsset) => {
-                    let amount = Number.parseFloat(currAsset.amount * currAsset.rate).toFixed(2);
-                    return acc + Number.parseFloat(amount);
-                }, 0);
+                let countryAssetsSum;
+                if(country.assets !== 0) {
+                    countryAssetsSum = country.assets.reduce((acc, currAsset) => {
+                        let amount = Number.parseFloat(currAsset.amount * currAsset.rate).toFixed(2);
+                        return acc + Number.parseFloat(amount);
+                    }, 0);
+                }
+
                 const fixed = Number.parseFloat(Number(countryAssetsSum).toFixed(2));
                 const chartElem = {
                     name: country.name,

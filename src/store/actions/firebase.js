@@ -55,14 +55,32 @@ export const getData = (userId, token) => {
                 if(data === null) {
                     return;
                 }
-                dispatch(assetsActions.setCountries(data.userData.assets.countries));
-                dispatch(incomeActions.setIncomes(data.userData.income.incomes));
-                dispatch(transactionsActions.setTransactions(data.userData.transactions));
+                //handle undefined properties
+                if(data.userData.assets.countries === 0) {
+                    dispatch(assetsActions.setCountries([]));
+                } else {
+                    data.userData.assets.countries.forEach(country => {
+                        if(country.assets === 0) {
+                            country.assets = [];
+                        }
+                    });
+                    dispatch(assetsActions.setCountries(data.userData.assets.countries));
+                }
+
+                if(Number.parseInt(data.userData.income.incomes) === 0) {
+                    dispatch(incomeActions.setIncomes([]));
+                } else {
+                    dispatch(incomeActions.setIncomes(data.userData.income.incomes));
+                }
+                const transactions = {
+                    incomeTransactions: data.userData.transactions.incomeTransactions === 0 ? [] : data.userData.transactions.incomeTransactions,
+                    outcomeTransactions: data.userData.transactions.outcomeTransactions === 0 ? [] : data.userData.transactions.outcomeTransactions,
+                }
+                dispatch(transactionsActions.setTransactions(transactions));
             });
         } catch (e) {
             console.log(e);
         }
-
     }
 }
 

@@ -21,7 +21,7 @@ const CountryTable = (props) => {
     }
 
     let tableContent;
-    if(store.assets.length > 0) {
+    if(store.assets != 0) {
         tableContent = <React.Fragment>
             {store.assets.map(asset => {
                 return (

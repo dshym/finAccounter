@@ -7,13 +7,14 @@ const AssetsTotalSum = () => {
 
     let summary = 0;
     if(assetsStore.length > 0) {
-
         assetsStore.forEach(country => {
-            const sum = country.assets.reduce((acc, currAsset) => {
-                const amount = Number.parseFloat(currAsset.amount * currAsset.rate).toFixed(2);
-                return acc + Number.parseFloat(amount);
+            if(country.assets !== 0) {
+                const sum = country.assets.reduce((acc, currAsset) => {
+                    const amount = Number.parseFloat(currAsset.amount * currAsset.rate).toFixed(2);
+                    return acc + Number.parseFloat(amount);
                 }, 0);
-            summary += sum;
+                summary += sum;
+            }
         })
     }
 

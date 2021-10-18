@@ -1,5 +1,5 @@
 import * as actionType from '../actions/assetsActionTypes';
-
+//import { Country } from '../../Classes/Country';
 const initialState = {
     countries: []
 };
@@ -12,10 +12,11 @@ const reducer = (state = initialState, action) => {
                 countries: action.countries
             }
         case actionType.ADD_COUNTRY:
+            //const newCountry = new Country(action.countryData.id, action.countryData.name);
             const newCountry = {
                 id: action.countryData.id,
                 name: action.countryData.name,
-                assets: []
+                assets: [],
             }
             const newState = {
                 countries: state.countries.concat(newCountry)

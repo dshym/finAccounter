@@ -124,9 +124,11 @@ const Form = () => {
              <p>Transaction account</p>
              <Select defaultValue={"Select asset"} style={{width: 400, marginBottom: 10}} onChange={selectHandler}>
                  {countriesList.length > 0 ? countriesList.map(country => {
-                     return country.assets.map(asset => {
-                         return <Option  value={asset.id}>{asset.name} {asset.amount} {asset.currency}</Option>
-                     })
+                     if(country.assets !== 0) {
+                         return country.assets.map(asset => {
+                             return <Option  value={asset.id}>{asset.name} {asset.amount} {asset.currency}</Option>
+                         })
+                     }
                  }) : <Option value={"addData"}>Add assets</Option> }
              </Select>
              <br/>

@@ -54,7 +54,7 @@ const MonthIncome = () => {
 
     useEffect(() => {
         const calculateSummary = () => {
-            if(incomesStore.length <= 0) {
+            if(incomesStore === 0 || incomesStore.length <= 0) {
                 return;
             }
             const sum = incomesStore.reduce((acc, currVal) => {
@@ -75,7 +75,6 @@ const MonthIncome = () => {
         }
         calculateSummary();
     },[incomesStore, currencyStore]);
-
   return(
       <div className={classes.container}>
           <table>
@@ -87,7 +86,7 @@ const MonthIncome = () => {
                   </tr>
               </thead>
               <tbody>
-                  {incomesStore.map(income => {
+                  {incomesStore !== 0 && incomesStore.map(income => {
                       return (
                           <IncomeItem
                               key={income.id}

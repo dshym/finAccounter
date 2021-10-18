@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './TransactionsHistory.module.css';
 
 import { useSelector } from 'react-redux';
@@ -7,18 +7,24 @@ import { Timeline } from 'antd';
 
 const TransactionsHistory = () => {
   const transactionStore = useSelector(state => state.transactions);
+  const [transactionsList, setTransactionsList] = useState([]);
 
-  const transactionsList = [];
-  if(transactionStore.incomeTransactions.length > 0 || transactionStore.incomeTransactions.length > 0) {
-    for (const transactionsListKey in transactionStore) {
-      transactionStore[transactionsListKey].forEach(trans => {
-        transactionsList.push(trans);
-      });
+  useEffect(() => {
+    let transList = [];
+    if(transactionStore.incomeTransactions.length > 0 || transactionStore.outcomeTransactions.length > 0) {
+      for (const transactionsListKey in transactionStore) {
+        if(transactionStore[transactionsListKey] !== 0) {
+          transactionStore[transactionsListKey].forEach(trans => {
+            transList.push(trans);
+          });
+        }
+      }
+      transList.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      })
     }
-    transactionsList.sort((a, b) => {
-      return new Date(a.date) - new Date(b.date);
-    })
-  }
+    setTransactionsList(transList);
+  }, [transactionStore])
 
   return(
       <Timeline className={classes.historyContainer}>
