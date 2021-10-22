@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import classes from './Navigation.module.css';
 import {Menu} from 'antd';

@@ -3,6 +3,8 @@ import * as assetsActions from './assets';
 import * as incomeActions from './income';
 import * as transactionsActions from './transactions';
 
+import { openNotificationWithIcon } from '../../components/CustomNotification/CustomNotification';
+
 export const setData = (userData) => {
     return {
         type: firebaseActions.SET_DATA,
@@ -20,7 +22,7 @@ export const saveData = (userId, userData, token) => {
     return async dispatch => {
         dispatch(setFirebaseLoading());
         try {
-            const response = fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
+            const response = await fetch(`https://fin-accounter-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,{
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,13 +31,12 @@ export const saveData = (userId, userData, token) => {
                     userData: userData
                 })
             });
-            const res = (await response).json();
-            res.then(data => {
-                console.log(data);
-            })
-            dispatch(setFirebaseLoading());
+            if(response.ok) {
+                dispatch(setFirebaseLoading());
+                openNotificationWithIcon('success', 'Data successfully saved on server', 'Success');
+            }
         } catch (e) {
-            console.log(e);
+            openNotificationWithIcon('error', 'Failed to save data on server', 'An error accured');
             dispatch(setFirebaseLoading());
         }
     }

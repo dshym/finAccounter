@@ -4,24 +4,17 @@ import { useSelector } from 'react-redux';
 
 import AuthForm from './AuthForm';
 import Profile from '../Profile/Profile';
-
-import { notification } from 'antd';
+import {openNotificationWithIcon} from '../CustomNotification/CustomNotification';
 
 const Authenctication = () => {
 
     const userDataStore = useSelector(state => state.auth);
 
     useEffect(() => {
-        const openNotificationWithIcon = (type, errorMessage) => {
-            notification[type]({
-                message: 'An error accured',
-                description: `${errorMessage}`,
-            });
-        };
         if(userDataStore.authError) {
-            console.log('error');
-            openNotificationWithIcon('error', userDataStore.authError);
+            openNotificationWithIcon('error', userDataStore.authError, 'An error accured');
         }
+
     }, [userDataStore.authError]);
 
   return(
