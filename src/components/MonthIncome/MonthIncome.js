@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 
 import classes from './MonthIncome.module.css';
 
@@ -15,7 +15,6 @@ const MonthIncome = () => {
     const [incomeName, setIncomeName] = useState(" ");
     const [incomeAmount, setIncomeAmount] = useState(0);
     const [currency, setCurrency] = useState(CURRENCIES.UAH.name);
-    const [summary, setSummary] = useState(0);
 
     const incomesStore = useSelector(state => state.income.incomes); //arr of income objects
     const currencyStore = useSelector(state => state.currencies.currencies);
@@ -52,29 +51,21 @@ const MonthIncome = () => {
         setIncomeName(" ");
     }
 
-    useEffect(() => {
-        const calculateSummary = () => {
-            if(incomesStore === 0 || incomesStore.length <= 0) {
-                return;
+    const summary = incomesStore.reduce((acc, currVal) => {
+        let amount = 0;
+        if(currVal.currency === CURRENCIES.UAH.name) {
+            amount += Number.parseFloat(currVal.amount);
+        } else {
+            if(currencyStore.length <= 0) {
+                amount = currVal.amount * currVal.rate;
+            } else {
+                const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
+                amount = currVal.amount * currencyWithRate.rate;
             }
-            const sum = incomesStore.reduce((acc, currVal) => {
-                let amount = 0;
-                if(currVal.currency === CURRENCIES.UAH.name) {
-                    amount += Number.parseFloat(currVal.amount);
-                } else {
-                    if(currencyStore.length <= 0) {
-                        amount = currVal.amount * currVal.rate;
-                    } else {
-                        const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
-                        amount = currVal.amount * currencyWithRate.rate;
-                    }
-                }
-                return acc + amount;
-            }, 0);
-            setSummary(sum);
         }
-        calculateSummary();
-    },[incomesStore, currencyStore]);
+        return acc + amount;
+    }, 0);
+
   return(
       <div className={classes.container}>
           <table>

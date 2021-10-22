@@ -80,7 +80,7 @@ export const getData = (userId, token) => {
                 dispatch(transactionsActions.setTransactions(transactions));
             });
         } catch (e) {
-            console.log(e);
+            openNotificationWithIcon('error', 'An error accured while loading data from personal data', 'An error accured');
         }
     }
 }

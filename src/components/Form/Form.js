@@ -129,6 +129,7 @@ const Form = () => {
                              return <Option  value={asset.id}>{asset.name} {asset.amount} {asset.currency}</Option>
                          })
                      }
+                     return 0;
                  }) : <Option value={"addData"}>Add assets</Option> }
              </Select>
              <br/>

@@ -10,8 +10,7 @@ import Column from '../../Layout/Column';
 
 const MainScreen = () => {
   return(
-      <Fragment>
-          <div className={classes.mainScreenContainer}>
+          <div className={classes.screen}>
               <ScreenLayout
                   leftContent={
                       <Column>
@@ -26,7 +25,6 @@ const MainScreen = () => {
                       </Column>
                   } />
           </div>
-      </Fragment>
   );
 }
 

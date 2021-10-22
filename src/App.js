@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import * as currencyActions from './store/actions/currencies';
-import * as assetsActions from './store/actions/assets';
-import * as incomeActions from './store/actions/income';
-import * as transactionsActions from './store/actions/transactions';
+// import * as assetsActions from './store/actions/assets';
+// import * as incomeActions from './store/actions/income';
+// import * as transactionsActions from './store/actions/transactions';
 
 import Navigation from './navigation/navigation';
 import MainLayout from './Layout/Layout';

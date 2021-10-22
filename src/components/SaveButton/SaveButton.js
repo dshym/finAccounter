@@ -6,7 +6,7 @@ import * as firebaseActions from '../../store/actions/firebase';
 import { Button } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import CustomSpiner from "../CustomSpiner/CustomSpiner";
-import { openNotificationWithIcon } from '../CustomNotification/CustomNotification';
+
 const SaveButton = () => {
   const userData = useSelector(state => state);
   const userDataStore = useSelector(state => state.auth);
