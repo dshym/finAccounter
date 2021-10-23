@@ -51,20 +51,24 @@ const MonthIncome = () => {
         setIncomeName(" ");
     }
 
-    const summary = incomesStore.reduce((acc, currVal) => {
-        let amount = 0;
-        if(currVal.currency === CURRENCIES.UAH.name) {
-            amount += Number.parseFloat(currVal.amount);
-        } else {
-            if(currencyStore.length <= 0) {
-                amount = currVal.amount * currVal.rate;
+    let summary;
+    if(incomesStore !== 0) {
+        summary = incomesStore.reduce((acc, currVal) => {
+            let amount = 0;
+            if(currVal.currency === CURRENCIES.UAH.name) {
+                amount += Number.parseFloat(currVal.amount);
             } else {
-                const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
-                amount = currVal.amount * currencyWithRate.rate;
+                if(currencyStore.length <= 0) {
+                    amount = currVal.amount * currVal.rate;
+                } else {
+                    const currencyWithRate = currencyStore.find(currency => currency.cc === currVal.currency);
+                    amount = currVal.amount * currencyWithRate.rate;
+                }
             }
-        }
-        return acc + amount;
-    }, 0);
+            return acc + amount;
+        }, 0);
+    }
+
 
   return(
       <div className={classes.container}>
