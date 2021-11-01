@@ -1,6 +1,5 @@
 import React from 'react';
 
-import classes from '../MainScreen.module.css';
 import { Divider } from 'antd';
 import ScreenLayout from '../../Layout/ScreenLayout';
 import FinancialAssets from '../../components/FinanscialAssets/FinancialAssets';
