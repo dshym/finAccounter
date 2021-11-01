@@ -9,7 +9,7 @@ import Column from '../../Layout/Column';
 
 const MainScreen = () => {
   return(
-      <div className={classes.screen}>
+      <div>
           <ScreenLayout
               leftContent={
                   <Column>

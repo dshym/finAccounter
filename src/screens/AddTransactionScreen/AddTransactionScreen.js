@@ -7,7 +7,7 @@ const AddTransactionScreen = () => {
   return(
       <div className={classes.container}>
           <div className={classes.formColumn}>
-              <Divider>Transactions</Divider>
+              <Divider>Add Transaction</Divider>
               <AddTransactionForm />
           </div>
           <div className={classes.historyColumn}>

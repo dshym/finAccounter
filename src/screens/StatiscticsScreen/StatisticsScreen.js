@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import classes from './StatisticsScreen.module.css';
 
 import { useSelector } from 'react-redux';
-
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
+import { Divider } from 'antd';
 import AssetsTotalSum from "../../components/AssetsSum/AssetsTotalSum";
 import TransactionsFilter from "../../components/TransactionsFilter/TransactionsFilter";
+
+import Chart from "../../components/Chart/Chart";
 
 const StatisticsScreen = () => {
     const [chartData, setChartData] = useState([]);
@@ -26,7 +27,7 @@ const StatisticsScreen = () => {
 
                 const fixed = Number.parseFloat(Number(countryAssetsSum).toFixed(2));
                 const chartElem = {
-                    name: country.name,
+                    type: country.name,
                     value: fixed,
                 }
                 chartData.push(chartElem);
@@ -37,29 +38,16 @@ const StatisticsScreen = () => {
 
   return(
       <div className={classes.statContainer}>
+          <Divider />
           <div className={classes.chartContainer}>
               <AssetsTotalSum />
-              <PieChart width={400} height={400}>
-                  <Pie
-                      dataKey="value"
-                      isAnimationActive={false}
-                      data={chartData}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#dec490 "
-                      label
-                  />
-                  <Cell/>
-                  <Legend/>
-                  <Tooltip/>
-              </PieChart>
+              <h3>Assets Allocation: </h3>
+              {assetsStore.countries.length > 0 ? <Chart data={chartData}/> : <p>No chart data...</p>}
           </div>
           <div className={classes.rigthColumn}>
               <TransactionsFilter />
           </div>
       </div>
-
   );
 }
 

@@ -1,8 +1,6 @@
 .container {
 
 }
-.container p {
-    margin: 0px;
-    font-size: large;
+.container h2 {
     font-weight: bold;
 }

@@ -20,7 +20,7 @@ const AssetsTotalSum = () => {
 
   return(
       <div className={classes.container}>
-          <p>Total assets sum: {Number.parseFloat(summary).toFixed(2)} UAH</p>
+          <h2>Total assets sum: {Number.parseFloat(summary).toFixed(2)} UAH</h2>
       </div>
   );
 }

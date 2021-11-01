@@ -54,7 +54,7 @@ const TransactionsFilter = () => {;
 
     return (
       <div>
-        <strong><p>Transaction filter</p></strong>
+        <h2>Transactions filter</h2>
         <Select defaultValue={selectedCategory} onChange={selectChangeHandler} className={classes.select}>
           {categoriesForSelect.map(category => {
             return <Option key={category} value={category}>{category}</Option>
@@ -79,7 +79,7 @@ const TransactionsFilter = () => {;
   }
 
   return(
-      <div>Add transactions</div>
+      <h2>Add transactions...</h2>
   );
 }
 
