@@ -5,6 +5,8 @@ import * as authActions from '../../store/actions/auth';
 import * as assetsActions from '../../store/actions/assets';
 import * as incomeActions from '../../store/actions/income';
 import * as tranactionActions from '../../store/actions/transactions';
+import * as investmentsActions from '../../store/actions/investments';
+
 import SaveButton from '../SaveButton/SaveButton';
 import {Button} from "antd";
 
@@ -18,6 +20,7 @@ const Profile = () => {
         dispatch(assetsActions.setCountries([]));
         dispatch(incomeActions.setIncomes([]));
         dispatch(tranactionActions.setTransactions({incomeTransactions: [], outcomeTransactions: []}));
+        dispatch(investmentsActions.setInvestments({}));
     }
 
   return(

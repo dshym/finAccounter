@@ -11,6 +11,7 @@ import currenciesReducer from './store/reducers/currencies';
 import transactionReducer from './store/reducers/transactions';
 import authReducer from './store/reducers/auth';
 import firebaseReducer from './store/reducers/firebase';
+import investmentsReducer from './store/reducers/investments';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     transactions: transactionReducer,
     auth: authReducer,
     firebase: firebaseReducer,
+    investments: investmentsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

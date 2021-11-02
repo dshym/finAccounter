@@ -14,7 +14,6 @@ const Authenctication = () => {
         if(userDataStore.authError) {
             openNotificationWithIcon('error', userDataStore.authError, 'An error accured');
         }
-
     }, [userDataStore.authError]);
 
   return(
