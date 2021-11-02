@@ -53,8 +53,10 @@ const InvestmentsTable = () => {
         } else {
             investment = new Investment(getRandId(), investmentName, investmentAmount, currency, currencyWithRate.rate, startDate, endDate);
         }
-
         dispatch(investmentActions.addInvestment(investment));
+        setInvestmentName('');
+        setInvestmentAmount(0);
+        setCurrency(CURRENCIES.UAH.name);
     }
 
     let bodyContent;
