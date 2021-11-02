@@ -2,6 +2,7 @@ import * as firebaseActions from './firebaseActionTypes';
 import * as assetsActions from './assets';
 import * as incomeActions from './income';
 import * as transactionsActions from './transactions';
+import * as investmentsActions from './investments';
 
 import { openNotificationWithIcon } from '../../components/CustomNotification/CustomNotification';
 
@@ -31,6 +32,10 @@ export const saveData = (userId, userData, token) => {
                     userData: userData
                 })
             });
+            if(!response.ok) {
+                dispatch(setFirebaseLoading());
+                openNotificationWithIcon('error', 'Failed to save data on server', 'An error accured');
+            }
             if(response.ok) {
                 dispatch(setFirebaseLoading());
                 openNotificationWithIcon('success', 'Data successfully saved on server', 'Success');
@@ -57,27 +62,34 @@ export const getData = (userId, token) => {
                     return;
                 }
                 //handle undefined properties
-                if(data.userData.assets.countries === 0) {
+                if(data.userData.countries === 0) {
                     dispatch(assetsActions.setCountries([]));
                 } else {
-                    data.userData.assets.countries.forEach(country => {
+                    data.userData.countries.forEach(country => {
                         if(country.assets === 0) {
                             country.assets = [];
                         }
                     });
-                    dispatch(assetsActions.setCountries(data.userData.assets.countries));
+                    dispatch(assetsActions.setCountries(data.userData.countries));
                 }
 
-                if(Number.parseInt(data.userData.income.incomes) === 0) {
+                if(Number.parseInt(data.userData.incomes) === 0) {
                     dispatch(incomeActions.setIncomes([]));
                 } else {
-                    dispatch(incomeActions.setIncomes(data.userData.income.incomes));
+                    dispatch(incomeActions.setIncomes(data.userData.incomes));
                 }
+
                 const transactions = {
                     incomeTransactions: data.userData.transactions.incomeTransactions === 0 ? [] : data.userData.transactions.incomeTransactions,
                     outcomeTransactions: data.userData.transactions.outcomeTransactions === 0 ? [] : data.userData.transactions.outcomeTransactions,
                 }
                 dispatch(transactionsActions.setTransactions(transactions));
+
+                if(data.userData.investments === 0) {
+                    dispatch(investmentsActions.setInvestments({}));
+                } else {
+                    dispatch(investmentsActions.setInvestments(data.userData.investments));
+                }
             });
         } catch (e) {
             openNotificationWithIcon('error', 'An error accured while loading data from personal data', 'An error accured');
