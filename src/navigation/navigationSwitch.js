@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import MainScreen from '../screens/MainScreen/MainScreen'
 import StatisticsScreen from '../screens/StatiscticsScreen/StatisticsScreen';
-import InvestmentScreen from '../screens/InvestmentsScreen';
+import InvestmentScreen from '../screens/InvestmentsScreen/InvestmentsScreen';
 import AddTransactionScreen from "../screens/AddTransactionScreen/AddTransactionScreen";
 
 const NavigationSwitch = () => {
