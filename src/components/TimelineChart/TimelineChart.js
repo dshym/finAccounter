@@ -1,26 +1,44 @@
+import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
+import { useSelector } from 'react-redux';
 
 const TimelineChart = () => {
-  return (
-      <Chart
-          width={'100%'}
-          chartType="Timeline"
-          loader={<div>Loading Chart</div>}
-          data={[
-              [
-                  { type: 'string', id: 'President' },
-                  { type: 'date', id: 'Start' },
-                  { type: 'date', id: 'End' },
-              ],
-              ['Washington', new Date(1789, 3, 30), new Date(1797, 2, 4)],
-              ['Adams', new Date(1797, 2, 4), new Date(1801, 2, 4)],
-              ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)],
-          ]}
-          options={{
-              showRowNumber: true,
-          }}
+    const [chartData, setChartData] = useState([[
+        {type: 'string', id: 'InvetsmentName'},
+        {type: 'date', id: 'Start'},
+        {type: 'date', id: 'End'},
+    ]]);
+    const investments = useSelector(state => state.investments.investments);
 
-      />
+    useEffect(() => {
+        const dataArr = [[
+            {type: 'string', id: 'InvetsmentName'},
+            {type: 'date', id: 'Start'},
+            {type: 'date', id: 'End'},
+        ]];
+        for (const investKey in investments) {
+            dataArr.push([investments[investKey].name, new Date(investments[investKey].startDate), new Date(investments[investKey].endDate)]);
+        }
+        setChartData(dataArr);
+    }, [investments]);
+
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  return (
+      <>
+          {chartData.length > 1 && <Chart
+              width={'100%'}
+              chartType="Timeline"
+              loader={<Spin indicator={antIcon}/>}
+              data={chartData}
+              options={{
+                  showRowNumber: true,
+              }}
+
+          />}
+      </>
   );
 }
 
